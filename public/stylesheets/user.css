@@ -1,0 +1,10 @@
+body {
+  background-color: #f1f1f1;
+  font-family: Helvetica, sans-serif;
+}
+
+input#live_search {
+  width: 400px;
+  font-size: 14px;
+  height: 20px;
+}
