@@ -6,7 +6,7 @@ module HomeHelper
     "if(b&&!document.xmlVersion){"\
       "void(z=document.createElement('script'));"\
       "void(z.type='text/javascript');"\
-      "void(z.src='http://127.0.0.1:3000/bookmarklet.js?auth_token='+t);"\
+      "void(z.src='#{request.protocol+request.host_with_port}/bookmarklet.js?auth_token='+t);"\
       "void(b.appendChild(z));"\
     "}else{}"
   end
