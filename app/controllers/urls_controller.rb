@@ -46,9 +46,13 @@ class UrlsController < ApplicationController
 
   def live_search
     if 2 < params[:query].size
-      @urls = Url.search(params[:query] + "*")
+      @urls = Url.search(
+        "*" + params[:query] + "*",
+      )
     else
-      @urls = Url.where(:account_id => current_account.id)
+      @urls = Url.where(
+        :account_id => current_account.id
+      ).order("created_at desc")
     end
     render :partial => @urls
   end
