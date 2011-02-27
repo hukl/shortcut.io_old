@@ -1,7 +1,8 @@
-<p><input id="live_search" type="text" placeholder="Search" /></p>
-
-
-
-<ul id="results">
-  <%= render :partial => @urls %>
-</ul>
+<div id="searchbox">
+  <input id="live_search" type="search" placeholder="Search" autofocus />
+</div>
+<div id="wrapper">
+  <ul id="bookmarks">
+    <%= render :partial => @urls %>
+  </ul>
+</div>

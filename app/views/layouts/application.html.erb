@@ -7,20 +7,20 @@
     <%= csrf_meta_tag %>
   </head>
   <body>
-    <div id="logo">
-      <%= image_tag 'logo.png' %>
-    </div>
-
     <div>
       <%= flash[:notice] %>
       <%= flash[:alert] %>
+    </div>
 
-    <div>
+    <header>
+      <div id="logo">
+        <%= image_tag 'logo.png' %>
+      </div>
       <% unless current_account.nil? %>
         <%= link_to 'Log out', destroy_account_session_path %>
         <%= link_to 'Shortcut.io', bookmarklet %>
       <% end %>
-    </div>
+    </header>
 
     <%= yield %>
 

@@ -1,10 +1,107 @@
-body {
-  background-color: #f1f1f1;
-  font-family: Helvetica, sans-serif;
+html, body {
+  height: 100%;
 }
 
-input#live_search {
-  width: 400px;
-  font-size: 14px;
-  height: 20px;
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #f1f1f1;
 }
+
+header {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+div#wrapper {
+  background-color: #FFFFFF;
+  width: 480px;
+  border-right: 1px solid #7c7c7c;
+  min-height: 100%; /* Mindesthöhe für moderne Browser */
+  height:auto !important; /* Important Regel für moderne Browser */
+  height:100%; /* Mindesthöhe für den IE */
+  overflow: hidden !important; /* FF Scroll-leiste */
+  z-index: -10;
+}
+
+div#searchbox {
+  z-index: 10;
+  background-color: #747c82;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 60px;
+  width: 480px;
+  border-right: 1px solid #7c7c7c;
+}
+
+div#searchbox input {
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 400px;
+}
+
+ul#bookmarks {
+  width: 480px;
+  padding-top: 60px;
+}
+
+time {
+  color: #747c82;
+  font-size: 12px;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+ul#bookmarks, ul#bookmarks li ul.tags {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+ul#bookmarks li.bookmark {
+  position: relative;
+  font-family: "HelveticaNeue-Light", Helvetica, Arial, sans-serif;
+  list-style-type: none;
+  border-bottom: 1px solid #c7c7c7;
+
+  padding-left: 20px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #ffffff;
+
+}
+
+ul#bookmarks li.bookmark h4 {
+  margin-top: 0px;
+  margin-bottom: 5px;
+  width: 340px;
+}
+
+ul#bookmarks li.bookmark div.url {
+  font-size: 14px;
+  color: #747c82;
+}
+
+ul#bookmarks li ul.tags li {
+  display: inline;
+}
+
+ul.tags li {
+  font-size: 14px;
+  padding: 3px;
+  background-color: #f1f1f1;
+  border: 0px solid #191919;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+ul.tags li:hover {
+  background-color: #b2bdc5;
+
+}
+

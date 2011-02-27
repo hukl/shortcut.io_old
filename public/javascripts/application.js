@@ -20,7 +20,7 @@ var live = {
           type      : 'POST',
           dataType  : 'html',
           success   : function(e) {
-            $('#results').html(e);
+            $('#bookmarks').html(e);
           }
         });
 
