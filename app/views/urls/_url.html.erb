@@ -1,7 +1,10 @@
 <li class="bookmark">
   <h4><%= url.title %></h4>
   <time datetime="2011-02-23T17:35:00-05:00">23. Feb 2011</time>
-  <div class="url"><%= url.uri %></div>
+  <div class="url">
+    <a href="<%= url.uri %>"><%= url.uri %></a>
+    <a href="#" class="copy">copy</a>
+  </div>
   <p><%= url.description %></p>
   <ul class="tags">
   <% url.tag_list.each do |tag| %>
