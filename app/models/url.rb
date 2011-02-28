@@ -12,6 +12,8 @@ class Url < ActiveRecord::Base
     indexes title
     indexes description
 
+    has account_id
+
     set_property :delta => true
   end
 end

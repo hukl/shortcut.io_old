@@ -48,6 +48,7 @@ class UrlsController < ApplicationController
     if 2 < params[:query].size
       @urls = Url.search(
         "*" + params[:query] + "*",
+        :with => { :account_id => current_account.id }
       )
     else
       @urls = Url.where(
