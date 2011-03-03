@@ -43,20 +43,29 @@
     <div id="bookmarklet_wrapper">
       <form action='#'>
         <p><input id="url" name="[url]uri" type='url' value='' /></p>
-        <p><input id="url" name="[url]title" type='text', value='' /></p>
+        <p><input id="title" name="[url]title" type='text', value='' /></p>
         <p><textarea name="[url]description" autofocus></textarea></p>
         <p><input type='text' name="[url]tags" placeholder='tags - comma separated' /></p>
+        <input id='referrer' type='hidden' name='[url]referrer' />
         <p><input id='send_button' type='submit' value='Add Bookmark' /></p>
       </form>
       <p><div id="close_button" style="width: 30px; height: 30px; background-color: yellow">close</div></p>
     </div>
 
     <script>
+      var foo = "";
       $(document).ready( function() {
         var origin = location.href.split("#")[1];
+
+        $.postMessage(
+          'meta_data',
+          origin,
+          parent
+        );
+
         document.getElementById('url').setAttribute('value', origin);
 
-        var token_regexp = /\b\?auth_token\=(.+)\#\b/
+        var token_regexp = /\b\?auth_token\=(.+)\&\b/
 
         if ( match = token_regexp.exec(location.href) ) {
           var token = match[1];
@@ -84,6 +93,14 @@
           return false;
         });
       });
+
+      $.receiveMessage(
+        function(message){
+          meta_data = $.parseJSON(message.data)
+          $('input#title').val(decodeURIComponent(meta_data.page_title));
+          //$('input#referrer').val(decodeURIComponent(meta_data.referrer));
+        }
+      );
     </script>
   </body>
 

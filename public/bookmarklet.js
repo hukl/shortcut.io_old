@@ -9,14 +9,16 @@ if (typeof jQuery == 'undefined') {
 }
 
 function runthis() {
+  jQuery.noConflict();
+
   var pm = document.createElement('script');
   pm.type = 'text/javascript';
   pm.onload=receive;
   pm.src = 'http://smyck.net/bookmarquis/jquery.ba-postmessage.min.js';
   document.body.appendChild(pm);
 
-  $(document.body).append("<iframe id='smyck_bookmarklet' src='http://nine.local:3000/bookmarklet.html?auth_token=" + t + "#" + location.href +"' />");
-  $('#smyck_bookmarklet').css({
+  jQuery(document.body).append("<iframe id='smyck_bookmarklet' src='https://beta5.shortcut.io/bookmarklet.html?auth_token=" + t + "#" + location.href +"' />");
+  jQuery('#smyck_bookmarklet').css({
     "z-index": "1000",
     "height": "400px",
     "width":  "460px",
@@ -31,13 +33,13 @@ function runthis() {
 }
 
 function receive() {
-  $.receiveMessage(
+  jQuery.receiveMessage(
     function(e){
       if (e.data == "close") {
-        $("#smyck_bookmarklet").remove();
+        jQuery("#smyck_bookmarklet").remove();
       }
     },
-   'http://nine.local:3000'
+   'https://beta5.shortcut.io'
   );
 }
 
