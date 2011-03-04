@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110221180012) do
+ActiveRecord::Schema.define(:version => 20110304221524) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20110221180012) do
     t.datetime "updated_at"
     t.integer  "account_id"
     t.boolean  "delta",       :default => true, :null => false
+    t.string   "referrer"
   end
 
   add_index "urls", ["account_id"], :name => "index_urls_on_account_id"

@@ -98,7 +98,7 @@
         function(message){
           meta_data = $.parseJSON(message.data)
           $('input#title').val(decodeURIComponent(meta_data.page_title));
-          //$('input#referrer').val(decodeURIComponent(meta_data.referrer));
+          $('input#referrer').val(decodeURIComponent(meta_data.referrer));
         }
       );
     </script>
