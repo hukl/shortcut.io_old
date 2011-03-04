@@ -65,7 +65,7 @@
 
         document.getElementById('url').setAttribute('value', origin);
 
-        var token_regexp = /\b\?auth_token\=(.+)\&\b/
+        var token_regexp = /\b\?auth_token\=(.+)\#\b/
 
         if ( match = token_regexp.exec(location.href) ) {
           var token = match[1];
