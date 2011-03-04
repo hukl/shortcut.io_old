@@ -31,6 +31,44 @@ var live = {
       }
 
     });
+
+    $('.bookmark').bind('click', function() {
+      $('.bookmark').each(function() {
+        $(this).attr('class', 'bookmark');
+      });
+      $(this).attr('class', 'bookmark selected');
+    });
+
+    $('body').bind('keydown', function(e) {
+      if (e.which == 40) {
+        next_item = $('.bookmark.selected').next();
+
+        if (0 < next_item.length) {
+          $('.bookmark').each(function() {
+            $(this).attr('class', 'bookmark');
+          });
+
+          next_item.attr('class', 'bookmark selected')
+
+          $('body').scrollTop( next_item.position().top-60);
+        }
+
+        return false;
+      } else if (e.which == 38) {
+        prev_item = $('.bookmark.selected').prev();
+
+        if (0 < prev_item.length) {
+          $('.bookmark').each(function() {
+            $(this).attr('class', 'bookmark');
+          });
+
+          prev_item.attr('class', 'bookmark selected')
+          $('body').scrollTop(prev_item.position().top-60);
+        }
+
+        return false;
+      }
+    });
   }
 }
 

@@ -88,6 +88,10 @@ ul#bookmarks li.bookmark {
 
 }
 
+ul#bookmarks li.bookmark.selected {
+  background-color: #f1f1f1;
+}
+
 ul#bookmarks li.bookmark h4 {
   margin-top: 0px;
   margin-bottom: 5px;
