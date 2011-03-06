@@ -97,7 +97,7 @@
       $.receiveMessage(
         function(message){
           meta_data = $.parseJSON(message.data)
-          $('input#title').val(decodeURIComponent(meta_data.page_title));
+          $('input#title').val(unescape(meta_data.page_title));
           $('input#referrer').val(decodeURIComponent(meta_data.referrer));
         }
       );
