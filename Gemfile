@@ -9,6 +9,8 @@ gem 'devise'
 gem 'ruby-debug19'
 gem 'thin'
 gem 'nokogiri'
+gem 'resque'
+gem 'uuid'
 
 # Bundle the extra gems:
 # gem 'bj'

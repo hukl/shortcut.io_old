@@ -1,0 +1,3 @@
+<% @urls.each do |url| %>
+  <img src="http://46.252.16.29/<%= url.image_uuid[0..3] %>/<%= url.image_uuid[4..7] %>/<%= url.image_uuid %>_500.jpg" /><br />
+<% end %>

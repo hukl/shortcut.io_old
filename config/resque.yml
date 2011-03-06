@@ -1,0 +1,3 @@
+development: 46.252.16.29:6379
+production: shortcut.io:6379
+

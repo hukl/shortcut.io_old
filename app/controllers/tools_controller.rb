@@ -1,7 +1,6 @@
 class ToolsController < ApplicationController
 
   def import
-
   end
 
   def convert
@@ -33,6 +32,10 @@ class ToolsController < ApplicationController
     Url.record_timestamps = true
 
     redirect_to :controller => :home, :action => :index
+  end
+
+  def thumbnails
+    @urls = Url.all
   end
 
 end

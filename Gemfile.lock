@@ -45,8 +45,10 @@ GEM
     jquery-rails (0.2.7)
       rails (~> 3.0)
       thor (~> 0.14.4)
+    json (1.4.6)
     linecache19 (0.5.11)
       ruby_core_source (>= 0.1.4)
+    macaddr (1.0.0)
     mail (2.2.15)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
@@ -75,6 +77,14 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
+    redis (2.1.1)
+    redis-namespace (0.10.0)
+      redis (< 3.0.0)
+    resque (1.13.0)
+      json (~> 1.4.6)
+      redis-namespace (>= 0.10.0)
+      sinatra (>= 0.9.2)
+      vegas (~> 0.1.2)
     riddle (1.2.2)
     ruby-debug-base19 (0.11.24)
       columnize (>= 0.3.1)
@@ -86,6 +96,9 @@ GEM
       ruby-debug-base19 (>= 0.11.19)
     ruby_core_source (0.1.4)
       archive-tar-minitar (>= 0.5.2)
+    sinatra (1.2.0)
+      rack (~> 1.1)
+      tilt (>= 1.2.2, < 2.0)
     thin (1.2.7)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -94,9 +107,14 @@ GEM
       activerecord (>= 3.0.3)
       riddle (>= 1.2.2)
     thor (0.14.6)
+    tilt (1.2.2)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
+    uuid (2.3.1)
+      macaddr (~> 1.0)
+    vegas (0.1.8)
+      rack (>= 1.0.0)
     warden (1.0.3)
       rack (>= 1.0.0)
 
@@ -110,6 +128,8 @@ DEPENDENCIES
   nokogiri
   pg
   rails (= 3.0.4)
+  resque
   ruby-debug19
   thin
   thinking-sphinx
+  uuid

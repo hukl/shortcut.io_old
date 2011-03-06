@@ -1,5 +1,6 @@
 Frontend::Application.routes.draw do
   get   "tools/import"
+  get   "tools/thumbnails"
   post  "tools/convert"
 
   devise_for :accounts
