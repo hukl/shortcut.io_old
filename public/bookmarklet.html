@@ -78,12 +78,6 @@
 
         document.getElementById('url').setAttribute('value', origin);
 
-        var token_regexp = /\b\?auth_token\=(.+)\#\b/
-
-        if ( match = token_regexp.exec(location.href) ) {
-          var token = match[1];
-        }
-
         $("#close_button").bind("click", function() {
           $.postMessage(
             'close',
@@ -96,7 +90,7 @@
           $.ajax({
             type: "POST",
             dataType: "json",
-            url: "/urls?auth_token=" + token,
+            url: "/urls?auth_token=" + params.auth_token,
             data: $('form').serialize(),
             success: function(msg){
               alert(msg.status+"\n"+msg.message);
