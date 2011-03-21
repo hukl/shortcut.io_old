@@ -18,9 +18,8 @@ function runthis() {
   document.body.appendChild(pm);
 
   jQuery(document.body).append(
-    "<iframe id='shortcut_bookmarklet' src='http://localhost:3000/bookmarklet.html" +
-    "?auth_token=" + t +
-    "#" + location.href +"' />"
+    "<iframe id='shortcut_bookmarklet' src='http://localhost:3000/bookmarklet.html?" +
+    jQuery.param({"auth_token" : t, "uri" : location.href}) +"' />"
   );
 
   jQuery('#shortcut_bookmarklet').css({

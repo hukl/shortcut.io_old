@@ -53,9 +53,22 @@
     </div>
 
     <script>
-      var foo = "";
+
+      parse_query_string = function() {
+        var result        = {};
+        var query_string  = location.search.slice(1);
+
+        $( query_string.split("&") ).each( function() {
+          key_value = this.split("=");
+          result[key_value[0]] = key_value[1];
+        });
+
+        return result;
+      }
+
       $(document).ready( function() {
-        var origin = location.href.split("#")[1];
+        var params = parse_query_string();
+        var origin = decodeURIComponent(params.uri);
 
         $.postMessage(
           'meta_data',

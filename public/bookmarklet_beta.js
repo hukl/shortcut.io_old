@@ -19,8 +19,7 @@ function runthis() {
 
   jQuery(document.body).append(
     "<iframe id='shortcut_bookmarklet' src='https://beta5.shortcut.io/bookmarklet.html" +
-    "?auth_token=" + t +
-    "#" + location.href +"' />"
+    jQuery.param({"auth_token" : t, "uri" : location.href}) +"' />"
   );
 
   jQuery('#shortcut_bookmarklet').css({
