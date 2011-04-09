@@ -51,7 +51,9 @@ class UrlsController < ApplicationController
     when 'filter_search'
       @urls = search_for( params[:query] )
     when 'filter_tags'
-      @urls = Url.tagged_with( params[:query] )
+      @urls = Url.where(
+        :account_id => current_account.id
+      ).tagged_with( params[:query] )
     end
     
     render :partial => @urls
