@@ -4,6 +4,8 @@ Frontend::Application.routes.draw do
   post  "tools/convert"
 
   devise_for :accounts
+  
+  resource :account
 
   get "home/index"
 

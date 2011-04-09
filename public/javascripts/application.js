@@ -2,8 +2,19 @@ $(document).ready( function() {
 
   live.init();
   links.init();
+	matrix.init();
 
-});
+});             
+
+var matrix = {
+	
+	init : function() {
+		$("div.uri div.details input").bind("click", function() {
+			$(this).select();
+		});
+	}
+	
+}
 
 
 var live = {

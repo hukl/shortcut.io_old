@@ -6,119 +6,114 @@ body {
   margin: 0px;
   padding: 0px;
   background-color: #f1f1f1;
-}
+	text-align: center;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #747c82;
+}     
 
-header {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-}
+a {
+	color: #747c82;
+	text-decoration: none;
+}                
 
-input.copy_url {
-  width: 250px;
+input:focus {
+	outline: none;
 }
-
-div.url a {
-  color: #747c82;
+   
+.right {
+	text-align: right;
 }
-
-div.url a.copy {
-  text-decoration: none;
-}
-
 
 div#wrapper {
-  background-color: #FFFFFF;
-  width: 480px;
-  border-right: 1px solid #7c7c7c;
-  min-height: 100%; /* Mindesthöhe für moderne Browser */
-  height:auto !important; /* Important Regel für moderne Browser */
-  height:100%; /* Mindesthöhe für den IE */
-  overflow: hidden !important; /* FF Scroll-leiste */
-  z-index: -10;
-}
-
-div#searchbox {
-  z-index: 10;
-  background-color: #747c82;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  height: 60px;
-  width: 480px;
-  border-right: 1px solid #7c7c7c;
-}
-
-div#searchbox input {
-  margin-left: 20px;
-  margin-top: 20px;
-  width: 400px;
-}
-
-ul#bookmarks {
-  width: 480px;
-  padding-top: 60px;
-}
-
-time {
-  color: #747c82;
-  font-size: 12px;
-  position: absolute;
-  top: 10px;
-  right: 20px;
-}
-
-ul#bookmarks, ul#bookmarks li ul.tags {
-  margin-top: 0px;
-  margin-left: 0px;
-  padding-left: 0px;
-}
-
-ul#bookmarks li.bookmark {
-  position: relative;
-  font-family: "HelveticaNeue-Light", Helvetica, Arial, sans-serif;
-  list-style-type: none;
-  border-bottom: 1px solid #c7c7c7;
-
-  padding-left: 20px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #ffffff;
 
 }
 
-ul#bookmarks li.bookmark.selected {
-  background-color: #f1f1f1;
+div#sign_in_box {
+	width: 400px;
+	margin: 0 auto;
+	text-align: left;
+	border: 1px solid #D1D1D1;     
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	margin-top: 200px;
+	padding: 40px;
+}                   
+
+div#sign_in_box input[type=text], div#sign_in_box input[type=password] {
+	font-size: 16px;
+	width: 388px;
+	padding: 5px;
+	border: 1px solid #d1d1d1;     
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}  
+
+div#sign_in_box input[type=submit] {
+	border: 1px solid #d1d1d1;
+	background-color: #747C82;
+	color: #f1f1f1;
+	font-size: 16px;
+	padding: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}                  
+
+div#sign_in_box a {
+	font-size: 12px;
+}                
+
+div#sign_in_box a:hover {
+	color: #404040;
+}                      
+
+/* MATRIX */
+
+div#matrix {    
+	margin-top: 100px;
+	padding: 30px;
+}              
+
+div#matrix div.uri { 
+	float: left;
+	margin-left: 25px;
+	margin-right: 25px;    
+	font-size: 10px;
+	position: relative;
 }
 
-ul#bookmarks li.bookmark h4 {
-  margin-top: 0px;
-  margin-bottom: 5px;
-  width: 340px;
+div#matrix div.uri img {
+	border: 5px solid #ffffff;  
+	padding: 1px;
+	-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+	   -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+	        box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+	
 }
 
-ul#bookmarks li.bookmark div.url {
-  font-size: 14px;
-  color: #747c82;
-}
+div#matrix div.uri div.details {
+	color: #404040;
+	text-align: center;    
+ 	height: 50px;
+}                             
 
-ul#bookmarks li ul.tags li {
-  display: inline;
-}
+div#matrix div.uri div.details h3 {
+	margin-top: 5px;
+	margin-bottom: 0px;
+} 
 
-ul.tags li {
-  font-size: 14px;
-  padding: 3px;
-  background-color: #f1f1f1;
-  border: 0px solid #191919;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-
-ul.tags li:hover {
-  background-color: #b2bdc5;
-
-}
+div#matrix div.uri div.details input[type=text] {
+	margin-top: -8px;
+	margin-bottom: 0px;
+	background-color: #f1f1f1;
+	border: none;
+	height: 10px;    
+	font-size: 10px;
+	line-height: 10px;
+	vertical-align: top;
+	width: 200px;
+	text-align: center;
+}              
 

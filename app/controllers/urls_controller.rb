@@ -3,6 +3,7 @@ class UrlsController < ApplicationController
   before_filter :authenticate_account!
 
   def index
+   @urls = current_account.urls.order("created_at DESC").all
   end
 
   def new
