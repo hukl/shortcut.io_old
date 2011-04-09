@@ -11,7 +11,7 @@ Frontend::Application.routes.draw do
 
   resources :urls do
     collection do
-      post 'live_search'
+      post 'search'
     end
   end
 

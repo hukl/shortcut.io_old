@@ -4,6 +4,7 @@
     <title>shortcut.io | <%= params[:action] %></title>
     <%= stylesheet_link_tag :all %>
     <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag 'handlebars-0.9.0.pre.5' %>
     <%= csrf_meta_tag %>
   </head>
   <body>
@@ -28,12 +29,14 @@
 
     <div id="search_results">
       <table>
+        <tbody id="filter">
           <tr class="selectable">
             <td class="search_category">Filter</td>
             <td class="search_category_result">new york</td>
           </tr>
           <tr><td>&nbsp;</td></tr>
-          
+        </tbody>
+        <tbody>
           <tr class="selectable">
             <td class="search_category">Results</td>
             <td class="search_category_result">TinEye Reverse Image Search</td>
@@ -55,7 +58,8 @@
             <td class="search_category_result">CSS3 Drop Shadows</td>
           </tr>
           <tr><td>&nbsp;</td></tr>
-          
+        </tbody>
+        <tbody id="filter_tags">
           <tr class="selectable">
             <td class="search_category">Tags</td>
             <td class="search_category_result">new york, city</td>
@@ -68,6 +72,7 @@
             <td class="search_category"></td>
             <td class="search_category_result">city</td>
           </tr>
+        </tbody>
       </table>
 
     </div>
@@ -77,5 +82,11 @@
       <%= yield %>
     </div>
 
+    <script id="search_result_items" type="text/x-handlebars-template">
+      <tr class="selectable">
+        <td class="search_category">{{title}}</td>
+        <td class="search_category_result">{{result}}</td>
+      </tr>
+    </script>
   </body>
 </html>

@@ -45,11 +45,14 @@ class UrlsController < ApplicationController
   def destroy
   end
 
-  def live_search
+  def search
+    params[:query] = [] if params[:query] =~ /^all$/
+    
     if 2 < params[:query].size
       @urls = Url.search(
         "*" + params[:query] + "*",
-        :with => { :account_id => current_account.id }
+        :with => { :account_id => current_account.id },
+        :limit => 20
       )
     else
       @urls = Url.where(

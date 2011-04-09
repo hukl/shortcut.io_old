@@ -1,14 +1,7 @@
-<li class="bookmark">
-  <h4><%= url.title %></h4>
-  <time datetime="2011-02-23T17:35:00-05:00">23. Feb 2011</time>
-  <div class="url">
-    <a href="<%= url.uri %>"><%= url.uri %></a>
-    <a href="#" class="copy">copy</a>
+<div class="uri">
+  <%= image_tag thumbnail_url( url ), :width => "200px", :height => "200px"%>
+  <div class="details">
+    <h3><%= truncate(url.title, :length => 32) %></h3>
+    <p><%= text_field_tag "url_#{url.id}", url.uri.gsub(/http\:\/\//, "") %></p>
   </div>
-  <p><%= url.description %></p>
-  <ul class="tags">
-  <% url.tag_list.each do |tag| %>
-    <li><%= tag %></li>
-  <% end %>
-  </ul>
-</li>
+</div>
