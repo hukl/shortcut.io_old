@@ -6,22 +6,22 @@ body {
   margin: 0px;
   padding: 0px;
   background-color: #f1f1f1;
-	text-align: center;
-	font-family: Helvetica, Arial, sans-serif;
-	color: #747c82;
-}     
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #747c82;
+}
 
 a {
-	color: #747c82;
-	text-decoration: none;
-}                
+  color: #747c82;
+  text-decoration: none;
+}
 
 input:focus {
-	outline: none;
+  outline: none;
 }
-   
+
 .right {
-	text-align: right;
+  text-align: right;
 }
 
 div#wrapper {
@@ -29,170 +29,170 @@ div#wrapper {
 }
 
 div#sign_in_box {
-	width: 400px;
-	margin: 0 auto;
-	text-align: left;
-	border: 1px solid #D1D1D1;     
-	-moz-border-radius: 15px;
-	-webkit-border-radius: 15px;
-	border-radius: 15px;
-	margin-top: 200px;
-	padding: 40px;
-}                   
+  width: 400px;
+  margin: 0 auto;
+  text-align: left;
+  border: 1px solid #D1D1D1;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  margin-top: 200px;
+  padding: 40px;
+}
 
 div#sign_in_box input[type=text], div#sign_in_box input[type=password] {
-	font-size: 16px;
-	width: 388px;
-	padding: 5px;
-	border: 1px solid #d1d1d1;     
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-}  
+  font-size: 16px;
+  width: 388px;
+  padding: 5px;
+  border: 1px solid #d1d1d1;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
 
 div#sign_in_box input[type=submit] {
-	border: 1px solid #d1d1d1;
-	background-color: #747C82;
-	color: #f1f1f1;
-	font-size: 16px;
-	padding: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-}                  
+  border: 1px solid #d1d1d1;
+  background-color: #747C82;
+  color: #f1f1f1;
+  font-size: 16px;
+  padding: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
 
 div#sign_in_box a {
-	font-size: 12px;
-}                
+  font-size: 12px;
+}
 
 div#sign_in_box a:hover {
-	color: #404040;
-}       
+  color: #404040;
+}
 
 /* Toolbar */
 
 div#toolbar {
-	position: absolute;
-	top: 0px;
-	height: 50px;
-	background-color: #cccccc;   
-	width: 100%;
-}            
+  position: absolute;
+  top: 0px;
+  height: 50px;
+  background-color: #cccccc;
+  width: 100%;
+}
 
 div#toolbar input[type=text] {
-	position: absolute;
-	right: 20px;       
-	width: 250px;
-	font-size: 14px;
-	border: 1px solid #f1f1f1;
- 	color: #7e7e7e;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-	padding: 5px;             
-	margin-top: 10px;
-}         
+  position: absolute;
+  right: 20px;
+  width: 250px;
+  font-size: 14px;
+  border: 1px solid #f1f1f1;
+  color: #7e7e7e;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  margin-top: 10px;
+}
 
 div#toolbar div#search {
-	position: absolute;
-	right: 20px;
-	width: 300px;
-	height: 50px;                 
-	background-color: #c0c0c0;
-}    
+  position: absolute;
+  right: 20px;
+  width: 300px;
+  height: 50px;
+  background-color: #c0c0c0;
+}
 
 /* Search Results */
 
 div#search_results {
-	position: absolute;
-	right: 20px;
-	top: 50px;
-	background-color: #ffffff;
-	height: 300px;
-	width: 300px;  
-	-moz-box-shadow: 0px 2px 5px #acacac;
-	-webkit-box-shadow: 0px 2px 5px #acacac;
-	box-shadow: 0px 2px 5px #acacac;  
-	display: none;
-	z-index: 1000;
-	padding-top: 20px;      
+  position: absolute;
+  right: 20px;
+  top: 50px;
+  background-color: #ffffff;
+  width: 300px;
+  -moz-box-shadow: 0px 2px 5px #acacac;
+  -webkit-box-shadow: 0px 2px 5px #acacac;
+  box-shadow: 0px 2px 5px #acacac;
+  display: none;
+  z-index: 1000;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+div#search_results table {
+  border-spacing: 0px 0px;
+}
+
+div#search_results table tr.selected {
+  background-color: #c0c0c0;
+  color: #f1f1f1;
 }
 
 div#search_results table td {
-	font-size: 12px;
-	vertical-align: top;
-} 
+  font-size: 12px;
+  vertical-align: middle;
+}
 
 div#search_results table td.search_category {
-	width: 60px;
-	padding-left: 10px;   
-	text-align: right;
-	font-weight: bold; 
+  width: 60px;
+  padding-left: 10px;
+  text-align: right;
+  font-weight: bold;
 }
 
-div#search_results table td.search_category_results {               
+div#search_results table td.search_category_result {
+  width: 280px;
   text-align: left;
-}
-
-div#search_results table td.search_category_results ul {
-	margin-top: -5px;
-	margin-left: 0px;  
-	padding-left: 20px;
-} 
-
-div#search_results table td.search_category_results ul li {
-	margin-left: 0px;
-	padding-left: 0px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	list-style-type: none;	
+  margin-left: 0px;
+  padding-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 /* MATRIX */
 
-div#matrix {    
-	margin-top: 100px;
-	padding: 30px;
-}              
+div#matrix {
+  margin-top: 100px;
+  padding: 30px;
+}
 
-div#matrix div.uri { 
-	float: left;
-	margin-left: 25px;
-	margin-right: 25px;    
-	font-size: 10px;
-	position: relative;
+div#matrix div.uri {
+  float: left;
+  margin-left: 25px;
+  margin-right: 25px;
+  font-size: 10px;
+  position: relative;
 }
 
 div#matrix div.uri img {
-	border: 5px solid #ffffff;  
-	padding: 1px;
-	-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-	   -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-	        box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-	
+  border: 5px solid #ffffff;
+  padding: 1px;
+  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+     -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+          box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+
 }
 
 div#matrix div.uri div.details {
-	color: #404040;
-	text-align: center;    
- 	height: 50px;
-}                             
+  color: #404040;
+  text-align: center;
+  height: 50px;
+}
 
 div#matrix div.uri div.details h3 {
-	margin-top: 5px;
-	margin-bottom: 0px;
-} 
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
 
 div#matrix div.uri div.details input[type=text] {
-	margin-top: -8px;
-	margin-bottom: 0px;
-	background-color: #f1f1f1;
-	border: none;
-	height: 10px;    
-	font-size: 10px;
-	line-height: 10px;
-	vertical-align: top;
-	width: 200px;
-	text-align: center;
-}              
+  margin-top: -8px;
+  margin-bottom: 0px;
+  background-color: #f1f1f1;
+  border: none;
+  height: 10px;
+  font-size: 10px;
+  line-height: 10px;
+  vertical-align: top;
+  width: 200px;
+  text-align: center;
+}
 

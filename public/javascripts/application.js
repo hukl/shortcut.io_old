@@ -1,30 +1,62 @@
 $(document).ready( function() {
   key_bindings.init();
   live.init();
-  links.init();
-	matrix.init();
+  matrix.init();
 
-});           
+});
 
 var key_bindings = {
-	init : function() {
-		$(document).bind("keyup", function(e) {
-			if (e.keyCode == 27 && $("#search_results").is(":visible") ) {
-				$("#search_results").hide();
-				$("#live_search").val("");
-			}
-		})
-	}
-}  
+  init : function() {
+    $(document).bind("keyup", function(e) {
+      if (e.keyCode == 27 && $("#search_results").is(":visible") ) {
+        $("#search_results").hide();
+        $("#live_search").val("");
+      }
+    })
+  }
+}
 
 var matrix = {
-	
-	init : function() {
-		$("div.uri div.details input").bind("click", function() {
-			$(this).select();
-		});
-	}
-	
+
+  init : function() {
+    $("div.uri div.details input").bind("click", function() {
+      $(this).select();
+    });
+  }
+
+}
+
+var search_results = {
+
+  show : function() {
+    $("#search_results").show();
+    $("#search_results tr").first().addClass("selected");
+    $("#live_search").bind("keydown", function( event ) {
+      if (event.which == 40) {
+        next_item = $('tr.selected').nextAll('.selectable').first();
+        
+        if (0 < next_item.length) {
+          $("tr.selected").removeClass("selected");
+          next_item.addClass("selected");
+        }
+        
+        return false;
+      } else if (event.which == 38) {
+        prev_item = $('tr.selected').prevAll('.selectable').first();
+
+        if (0 < prev_item.length) {
+          $("tr.selected").removeClass("selected");
+          prev_item.addClass("selected");
+        }
+        return false;
+      }
+    });
+  },
+
+  hide : function() {
+    $("#search_results").hide();
+  }
+
 }
 
 
@@ -43,7 +75,7 @@ var live = {
           type      : 'POST',
           dataType  : 'html',
           success   : function(e) {
-            $("#search_results").show();
+            search_results.show();
           }
         });
 
@@ -59,69 +91,5 @@ var live = {
       });
       $(this).attr('class', 'bookmark selected');
     });
-
-    $('body').bind('keydown', function(e) {
-      if (e.which == 40) {
-        next_item = $('.bookmark.selected').next();
-
-        if (0 < next_item.length) {
-          $('.bookmark').each(function() {
-            $(this).attr('class', 'bookmark');
-          });
-
-          next_item.attr('class', 'bookmark selected')
-
-          $('body').scrollTop( next_item.position().top-60);
-        }
-
-        return false;
-      } else if (e.which == 38) {
-        prev_item = $('.bookmark.selected').prev();
-
-        if (0 < prev_item.length) {
-          $('.bookmark').each(function() {
-            $(this).attr('class', 'bookmark');
-          });
-
-          prev_item.attr('class', 'bookmark selected')
-          $('body').scrollTop(prev_item.position().top-60);
-        }
-
-        return false;
-      }
-    });
-  }
-}
-
-var links = {
-  init : function() {
-    $('a.copy').bind('click', function(e) {
-      url = $(this).prev().attr("href")
-
-      $(this).prev().replaceWith(
-        "<input type='text' class='copy_url' value='"+ url +"' />"
-      );
-
-      $(this).prev().select();
-
-      $(this).prev().bind('blur', function() {
-        $(this).replaceWith("<a href='"+url+"'>"+url+"</a>")
-      });
-
-      return false
-    })
-
-
-    $('div.post').bind('mouseenter', function() {
-      $(this).animate({
-        backgroundColor : "#e6e6e6"
-      }, 300)
-    })
-
-    $('div.post').bind('mouseleave', function() {
-      $(this).animate({
-        backgroundColor : "#f1f1f1"
-      }, 300)
-    })
   }
 }
