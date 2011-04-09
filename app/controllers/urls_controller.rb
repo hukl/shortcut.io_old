@@ -48,23 +48,28 @@ class UrlsController < ApplicationController
   def search
     case params[:query_type]
       
-    when 'filter'
-      if params[:query] =~ /^all$/
-        query = "" 
-      else
-        query = "*" + params[:query] + "*"
-      end
-      
-      @urls = Url.search(
-        query,
-        :with       => { :account_id => current_account.id },
-        :limit      => 20,
-        :sort_mode => :extended,
-        :order => "created_at DESC"
-      )
+    when 'filter_search'
+      @urls = search_for( params[:query] )
+    when 'filter_tags'
+      @urls = Url.tagged_with( params[:query] )
     end
     
     render :partial => @urls
   end
-
+  
+  def search_for query
+    if query =~ /^all$/
+      sphinx_query = "" 
+    else
+      sphinx_query = "*" + query + "*"
+    end
+    
+    @urls = Url.search(
+      sphinx_query,
+      :with       => { :account_id => current_account.id },
+      :limit      => 20,
+      :sort_mode => :extended,
+      :order => "created_at DESC"
+    )
+  end
 end

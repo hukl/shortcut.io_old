@@ -75,6 +75,7 @@ var search_results = {
         if (event.which == 13) {
           search_results.get_results( $('#search_results table tr.selected') );
           search_results.hide();
+          return false;
         }
       });
     }
@@ -102,11 +103,22 @@ var search_results = {
   },
   
   get_results : function(element) {
-    if (element.parent().attr('id') == 'filter') {
+    var query_type = element.parent().attr('id');
+    console.log(query_type)
+    
+    if (query_type == 'filter_search') {
       var query = element.children('.search_category_result').html();
       search_results.query_server({
         query       : query,
-        query_type  : 'filter',
+        query_type  : query_type,
+        dataType    : 'html',
+        success     : search_results.update_matrix
+      });
+    } else if (query_type == 'filter_tags') {
+      var query = element.children('.search_category_result').html();
+      search_results.query_server({
+        query       : query,
+        query_type  : query_type,
         dataType    : 'html',
         success     : search_results.update_matrix
       });
@@ -145,36 +157,19 @@ var live = {
   init : function() {
 
     $('#live_search').bind('keyup', function(event) {
-      if (event.which != 40 && event.which != 38) {
+      if (event.which != 40 && event.which != 38 && event.which != 13) {
         current_value = $('#live_search').val();
         if (current_value == "") {
-          $("#filter td.search_category_result").html("all");
+          $("#filter_search td.search_category_result").html("all");
         } else {
-          $("#filter td.search_category_result").html(current_value);
+          $("#filter_search td.search_category_result").html(current_value);
         }
         
         search_results.show();
         
-        
-        
         if ($('#search_results table tr.selected').length == 0) {
           $('#search_results table tr.selectable').first().addClass('selected');
         }
-        
-        // if ( current_value != live.last_value ) {
-        // 
-        //   $.ajax({
-        //     url       : '/urls/live_search?query=' + current_value,
-        //     type      : 'POST',
-        //     dataType  : 'html',
-        //     success   : function(e) {
-        //       
-        //     }
-        //   });
-        // 
-        // 
-        //   live.last_value = current_value;
-        // }
         
         live.compute_tags(current_value);
       }
