@@ -1,8 +1,129 @@
-<div id="searchbox">
-  <input id="live_search" type="search" placeholder="Search" autofocus />
-</div>
-<div id="wrapper">
-  <ul id="bookmarks">
-    <%= render :partial => @urls %>
-  </ul>
-</div>
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <title>Shortcut - Reclaim your bookmarks!</title>
+    <style type="text/css">       
+      
+			html { height: 100%; }
+
+      body {
+        background-color: #f1f1f1;
+        font-family: "HelveticaNeue-Light", Helvetica, Arial, sans-serif;
+        color: #747c82;
+        font-size: 15px;               
+      }                         
+
+			a#sign_in {
+				color: #747c82;
+				text-decoration: none;
+				padding-right: 20px;
+				position: absolute;
+				left: 10px;
+				top: 10px;
+			}
+
+      div#signup {
+				position: relative;
+        width: 500px;    
+				margin: 0 auto;
+				margin-top: 200px;
+      }
+
+      div#signup p#info {
+        padding-left: 2px;
+      }
+
+      div#logo_claim {
+        margin-bottom: 20px;
+      }
+
+      div#signup p {
+        clear: both;
+      }
+
+      input[type=email] {
+        float: left;
+        font-size: 24px;
+        padding: 5px;
+        border:solid 1px #747c82;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background-color: #ffffff;
+        width: 315px;
+        height: 28px;
+        margin-right: 10px;
+        color: #747c82;
+      }
+
+      input[type=submit] {
+        border: none;
+        font-size: 15px;
+        color: #ffffff;
+        padding: 5px;
+        background-color: #9fadb7;
+        background-image: url(/images/signup.png);
+        background-repeat:no-repeat;
+        height: 40px;
+        width: 120px;
+        font-family: Helvetica, sans-serif;
+        letter-spacing: 1px;
+      }
+
+      input[type=submit]:active {
+        background-image: url(/images/signup.png);
+        background-position: 0px -50px;
+      }
+
+      div#social {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="signup">
+
+      <div id="logo_claim">
+        <img src="/images/logo.png" alt="shortcut.io - Reclaim your bookmarks!" />
+      </div>
+
+      <form action="http://shortcutio.createsend.com/t/r/s/xslyr/" method="post" id="subForm">
+
+        <div>
+          <input type="email" name="cm-xslyr-xslyr" id="xslyr-xslyr" placeholder="your@email.com" size="25" />
+          <input type="submit" value="" />
+          <p id="info">Subscribe to get notified by email about updates.</p>
+        </div>
+
+      </form>
+
+    </div>
+
+		<a href="/accounts/sign_in" id="Sign in">Sign in</a>
+		
+    <div id="social">
+      <a href="http://www.facebook.com/pages/shortcutio/194611533892982"><img src="/images/facebook.png" alt="facebook" /></a>
+      <a href="http://twitter.com/shortcutio"><img src="/images/twitter.png" alt="twitter" /></a>
+    </div>
+
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stats.smyck.org/" : "http://stats.smyck.org/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 4);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stats.smyck.org/piwik.php?idsite=4" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Tag -->
+
+  </body>
+
+</html>
