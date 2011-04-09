@@ -3,4 +3,6 @@ db/*.sqlite3
 log/*.log
 tmp/
 db/sphinx
+db/*.backup
 log/searchd.*
+config/*.sphinx.conf
