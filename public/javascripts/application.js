@@ -1,10 +1,21 @@
 $(document).ready( function() {
-
+  key_bindings.init();
   live.init();
   links.init();
 	matrix.init();
 
-});             
+});           
+
+var key_bindings = {
+	init : function() {
+		$(document).bind("keyup", function(e) {
+			if (e.keyCode == 27 && $("#search_results").is(":visible") ) {
+				$("#search_results").hide();
+				$("#live_search").val("");
+			}
+		})
+	}
+}  
 
 var matrix = {
 	
@@ -32,8 +43,7 @@ var live = {
           type      : 'POST',
           dataType  : 'html',
           success   : function(e) {
-            $('#bookmarks').html(e);
-            links.init();
+            $("#search_results").show();
           }
         });
 

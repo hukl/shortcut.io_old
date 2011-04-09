@@ -18,6 +18,50 @@
         <%= link_to 'Shortcut.io', bookmarklet %>
       <% end %>
     </header>
+
+		<% if current_account %>
+		<div id="toolbar">
+			<div id="search">
+				<input type="text" id="live_search" autofocus />
+			</div>
+		</div>                           
+		
+		<div id="search_results">
+			<table>
+				<tr>
+					<td class="search_category">Results</td>
+					<td class="search_category_results">
+						<ul>
+							<li>TinEye Reverse Image Search</li>
+							<li>Solarized - EthanSchoonover.com</li>
+							<li>It's Got What Plants Crave</li>
+							<li>Euruko 2011</li>
+							<li>PhantomJS</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td class="search_category">Filter</td>
+					<td class="search_category_results">
+						<ul>
+							<li>new york</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td class="search_category">Tagged</td>
+					<td class="search_category_results">
+						<ul>
+							<li>new york, city</li>
+							<li>city</li>
+							<li>new york</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+	 
+		</div>
+		<% end %>
     
 		<div id="wrapper">
 			<%= yield %>
