@@ -13,7 +13,8 @@ class Url < ActiveRecord::Base
     indexes uri
     indexes title
     indexes description
-
+    has created_at
+    
     has account_id
 
     set_property :delta => true

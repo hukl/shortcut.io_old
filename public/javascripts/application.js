@@ -90,7 +90,7 @@ var search_results = {
   
   query_server : function( options ) {
     $.ajax({
-      url       : '/urls/search?query=' + options.query,
+      url       : '/urls/search?query=' + options.query + '&query_type=' + options.query_type,
       type      : 'POST',
       dataType  : options.dataType,
       success   : options.success
@@ -105,9 +105,10 @@ var search_results = {
     if (element.parent().attr('id') == 'filter') {
       var query = element.children('.search_category_result').html();
       search_results.query_server({
-        query    : query,
-        dataType : 'html',
-        success  : search_results.update_matrix
+        query       : query,
+        query_type  : 'filter',
+        dataType    : 'html',
+        success     : search_results.update_matrix
       });
     }
   }

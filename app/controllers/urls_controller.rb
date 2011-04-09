@@ -46,19 +46,24 @@ class UrlsController < ApplicationController
   end
 
   def search
-    params[:query] = [] if params[:query] =~ /^all$/
-    
-    if 2 < params[:query].size
+    case params[:query_type]
+      
+    when 'filter'
+      if params[:query] =~ /^all$/
+        query = "" 
+      else
+        query = "*" + params[:query] + "*"
+      end
+      
       @urls = Url.search(
-        "*" + params[:query] + "*",
-        :with => { :account_id => current_account.id },
-        :limit => 20
+        query,
+        :with       => { :account_id => current_account.id },
+        :limit      => 20,
+        :sort_mode => :extended,
+        :order => "created_at DESC"
       )
-    else
-      @urls = Url.where(
-        :account_id => current_account.id
-      ).order("created_at desc")
     end
+    
     render :partial => @urls
   end
 
