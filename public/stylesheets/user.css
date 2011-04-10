@@ -275,3 +275,10 @@ div#edit_url_view form textarea, div#edit_url_view form input[type=text] {
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
+
+/* pagination */
+
+div.pagination {
+  position: absolute;
+  bottom: 20px;
+}

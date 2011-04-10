@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/mislav/will_paginate.git
+  revision: f169dcc1fbb8ab2600103dd5cde9b7c3b45bf763
+  specs:
+    will_paginate (2.3.15)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -133,3 +139,4 @@ DEPENDENCIES
   thin
   thinking-sphinx
   uuid
+  will_paginate!

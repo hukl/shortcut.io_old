@@ -33,6 +33,16 @@ var matrix = {
     $("div.uri").bind("mouseout", function() {
       $(this).children('div.meta').hide();
     });
+
+    $('#matrix').infinitescroll({
+
+        navSelector  : "div.pagination",
+                       // selector for the paged navigation (it will be hidden)
+        nextSelector : "div.pagination a.next_page",
+                       // selector for the NEXT link (to page 2)
+        itemSelector : "#matrix div.uri"
+                       // selector for all items you'll retrieve
+      });
   }
 
 }

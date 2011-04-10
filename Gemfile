@@ -11,6 +11,7 @@ gem 'thin'
 gem 'nokogiri'
 gem 'resque'
 gem 'uuid'
+gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git'
 
 # Bundle the extra gems:
 # gem 'bj'
