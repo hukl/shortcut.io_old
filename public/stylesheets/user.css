@@ -172,6 +172,30 @@ div#matrix div.uri img {
 
 }
 
+div#matrix div.uri div.meta {
+  position: absolute;
+  top: 165px;
+  right: 6px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: none;
+  border-top: 1px solid #d1d1d1;
+  border-left: 1px solid #d1d1d1;
+  -moz-border-radius-topleft: 50px;
+  -webkit-border-radius-topleft: 50px;
+  border-top-left-radius:5px;
+}
+
+div#matrix div.uri div.meta img {
+  border: none;
+  background-color: none;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
 div#matrix div.uri div.details {
   color: #404040;
   text-align: center;
