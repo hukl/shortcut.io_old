@@ -1,9 +1,14 @@
 <div class="uri">
-  <%= image_tag thumbnail_url( url ), :width => "200px", :height => "200px"%>
+  <%= image_tag url.thumbnail_url(200), :width => "200px", :height => "200px"%>
   <div class="meta">
     <%= link_to image_tag('export_icon_16.png'), url.uri %>
     <%= image_tag 'eye_icon_16.png' %>
-    <%= image_tag 'doc_edit_icon_16.png' %>
+    <%= link_to(
+          image_tag('doc_edit_icon_16.png'), 
+          '#', 
+          :rel => url.id,
+          :class => 'edit_url'
+        ) %>
   </div>
   <div class="details">
     <h3><%= truncate(url.title, :length => 32) %></h3>

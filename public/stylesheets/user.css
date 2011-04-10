@@ -16,12 +16,27 @@ a {
   text-decoration: none;
 }
 
-input:focus {
+input:focus, textarea:focus {
   outline: none;
 }
 
 .right {
   text-align: right;
+}
+
+.form_buttons {
+  text-align: right;
+}
+
+.form_buttons input {
+  border: 1px solid #d1d1d1;
+  background-color: #747c82;
+  color: #ffffff;
+  padding: 5px;
+  font-size: 12px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
 }
 
 div#wrapper {
@@ -181,8 +196,8 @@ div#matrix div.uri div.meta {
   display: none;
   border-top: 1px solid #d1d1d1;
   border-left: 1px solid #d1d1d1;
-  -moz-border-radius-topleft: 50px;
-  -webkit-border-radius-topleft: 50px;
+  -moz-border-radius-topleft: 5px;
+  -webkit-border-radius-topleft: 5px;
   border-top-left-radius:5px;
 }
 
@@ -220,3 +235,43 @@ div#matrix div.uri div.details input[type=text] {
   text-align: center;
 }
 
+/* edit url */
+
+div#edit_url_view {
+  width: 800px;
+  min-height: 400px;
+  background-color: #ffffff;
+  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+     -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+          box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  text-align: left;
+  font-size: 12px; 
+}
+
+div#edit_url_view p {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+div#edit_url_view .thumbnail_frame {
+  border: 1px solid #d1d1d1;
+  position: absolute;
+  left: 40px;
+  top: 50px;
+}
+
+div#edit_url_view form {
+  position: absolute;
+  left: 390px;
+  top: 50px;
+}
+
+div#edit_url_view form textarea, div#edit_url_view form input[type=text] {
+  color: #747C82;
+  width: 350px;
+  border: 1px solid #d1d1d1;
+  padding: 5px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}

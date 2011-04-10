@@ -5,6 +5,7 @@
     <%= stylesheet_link_tag :all %>
     <%= javascript_include_tag :defaults %>
     <%= javascript_include_tag 'handlebars-0.9.0.pre.5' %>
+    <%= javascript_include_tag 'url' %>
     <%= csrf_meta_tag %>
   </head>
   <body>
@@ -87,6 +88,37 @@
         <td class="search_category">{{title}}</td>
         <td class="search_category_result">{{result}}</td>
       </tr>
+    </script>
+    
+    <script id="edit_url_template" type="text/x-handlebars-template">
+      <div id="edit_url_view">
+        <div class="thumbnail_frame">
+          <img src="{{thumbnail}}" width="300px" height="300px"/>
+        </div>
+        <form action="#">
+          <p>
+            <label for="url[uri]">URL</label><br />
+            <input type="text" name="url[uri]" value="{{uri}}" tabindex="1" />
+          </p>
+          <p>
+            <label for="url[title]">Title</label><br />
+            <input type="text" name="url[title]" value="{{title}}" tabindex="2"/>
+          </p>
+          <p>
+            <label for="url[description]">Description</label><br />
+            <textarea rows="4" name="url[description]" tabindex="3">{{description}}</textarea>
+          </p>
+          <p>
+            <label for="url[tags]">Tags</label><br />
+            <input type="text" name="url[tags]" value="{{tags}}" tabindex="4"/>
+          </p>
+          <p class="form_buttons">
+            <input type="reset" value="Cancel" />
+            <input type="submit" value="Save"  />
+          </p>
+          <input type="hidden" name="id" value="{{id}}" />
+        </form>
+      </div>
     </script>
   </body>
 </html>

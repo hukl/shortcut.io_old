@@ -20,14 +20,16 @@ var key_bindings = {
 var matrix = {
 
   init : function() {
+    url.init();
+
     $("div.uri div.details input").bind("click", function() {
       $(this).select();
     });
-    
+
     $("div.uri").bind("mouseover", function() {
       $(this).children('div.meta').show();
     });
-    
+
     $("div.uri").bind("mouseout", function() {
       $(this).children('div.meta').hide();
     });

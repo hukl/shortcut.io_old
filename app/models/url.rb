@@ -14,7 +14,7 @@ class Url < ActiveRecord::Base
     indexes title
     indexes description
     has created_at
-    
+
     has account_id
 
     set_property :delta => true
@@ -26,6 +26,10 @@ class Url < ActiveRecord::Base
     end
   end
 
+  def thumbnail_url size
+    "http://background.shortcut.io/#{image_uuid[0..3]}/#{image_uuid[4..7]}/#{image_uuid}_#{size}.jpg"
+  end
+
   private
 
   def create_image_uuid
@@ -35,4 +39,5 @@ class Url < ActiveRecord::Base
   def create_thumbnail
     Resque.enqueue( Thumbnail, self.uri, self.image_uuid )
   end
+
 end

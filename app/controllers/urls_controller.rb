@@ -34,12 +34,41 @@ class UrlsController < ApplicationController
   end
 
   def show
+    url = Url.find( params[:id] )
+
+    response = { :url => {
+      :id           => url.id,
+      :title        => url.title,
+      :description  => url.description,
+      :uri          => url.uri,
+      :thumbnail    => url.thumbnail_url(300),
+      :tags         => url.tag_list
+    }}
+
+    respond_to do |format|
+      format.js do
+        render :json => response.to_json
+      end
+    end
   end
 
   def edit
   end
 
   def update
+    @url = Url.find( params[:id] )
+
+    tags = params[:url].delete( :tags )
+
+    params[:url].merge!(:account_id => current_account.id)
+
+    @url.tag_list = tags
+
+    if @url.update_attributes( params[:url] )
+      render :json => {:status => :ok}.to_json
+    else
+      render :json => {:status => :error}.to_json
+    end
   end
 
   def destroy
@@ -47,7 +76,7 @@ class UrlsController < ApplicationController
 
   def search
     case params[:query_type]
-      
+
     when 'filter_search'
       @urls = search_for( params[:query] )
     when 'filter_tags'
@@ -55,17 +84,17 @@ class UrlsController < ApplicationController
         :account_id => current_account.id
       ).tagged_with( params[:query] )
     end
-    
+
     render :partial => @urls
   end
-  
+
   def search_for query
     if query =~ /^all$/
-      sphinx_query = "" 
+      sphinx_query = ""
     else
       sphinx_query = "*" + query + "*"
     end
-    
+
     @urls = Url.search(
       sphinx_query,
       :with       => { :account_id => current_account.id },
