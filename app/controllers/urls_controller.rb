@@ -3,11 +3,18 @@ class UrlsController < ApplicationController
   before_filter :authenticate_account!
 
   def index
-    @urls = Url.where(:account_id => current_account.id).paginate(
-      :page     => params[:page],
-      :per_page => 20,
-      :order    => "created_at DESC"
-    )
+    respond_to do |format|
+      format.html {}
+      format.js do
+        @urls = Url.where(:account_id => current_account.id).paginate(
+          :page     => params[:page],
+          :per_page => 20,
+          :order    => "created_at DESC"
+        )
+
+        render :json => @urls
+      end
+    end
   end
 
   def new

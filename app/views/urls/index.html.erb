@@ -1,5 +1,46 @@
-<div id="matrix">
-  <%= render :partial => @urls %>
-</div>
+<div id="matrix"></div>
 
-<%= will_paginate @urls %>
+
+<script id="url_template" type="text/x-handlebars-template">
+    <a href="{{uri}}">
+      <img src="{{thumbnail_url_200 image_uuid}}" height="200" width="200" />
+    </a>
+    <div class="meta">
+      <a href="#"><img src="/images/eye_icon_16.png" /></a>
+      <a href="#" class="edit_url"><img src="/images/doc_edit_icon_16.png" /></a>
+      <a href="#"><img src="/images/delete_icon_16.png" /></a>
+    </div>
+    <div class="details">
+      <h3>{{truncate title}}</h3>
+      <p><input type="text" value="{{uri}}" /></p>
+    </div>
+</script>
+
+<script id="edit_url_template" type="text/x-handlebars-template">
+    <div class="thumbnail_frame">
+      <img src="{{thumbnail_url_300 image_uuid}}" width="300px" height="300px"/>
+    </div>
+    <form action="#">
+      <p>
+        <label for="url[uri]">URL</label><br />
+        <input type="text" name="url[uri]" value="{{uri}}" tabindex="1" />
+      </p>
+      <p>
+        <label for="url[title]">Title</label><br />
+        <input type="text" name="url[title]" value="{{title}}" tabindex="2"/>
+      </p>
+      <p>
+        <label for="url[description]">Description</label><br />
+        <textarea rows="4" name="url[description]" tabindex="3">{{description}}</textarea>
+      </p>
+      <p>
+        <label for="url[tags]">Tags</label><br />
+        <input type="text" name="url[tags]" value="" tabindex="4"/>
+      </p>
+      <p class="form_buttons">
+        <input type="reset" value="Cancel" />
+        <input type="submit" value="Save"  />
+      </p>
+      <input type="hidden" name="id" value="{{id}}" />
+    </form>
+</script>

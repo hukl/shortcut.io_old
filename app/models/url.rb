@@ -20,6 +20,14 @@ class Url < ActiveRecord::Base
     set_property :delta => true
   end
 
+  ActiveRecord::Base.include_root_in_json = false
+
+  def to_json(options = {})
+    super(options.merge(
+      :only => [ :id, :title, :created_at, :description, :uri, :image_uuid])
+    )
+  end
+
   def generate_image_uuid
     if image_uuid.nil?
       update_attribute :image_uuid, UUID.generate
