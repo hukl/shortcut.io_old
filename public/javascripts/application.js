@@ -22,18 +22,6 @@ var matrix = {
   init : function() {
     url.init();
 
-    $("div.uri div.details input").bind("click", function() {
-      $(this).select();
-    });
-
-    $("div.uri").bind("mouseover", function() {
-      $(this).children('div.meta').show();
-    });
-
-    $("div.uri").bind("mouseout", function() {
-      $(this).children('div.meta').hide();
-    });
-
     $('#matrix').infinitescroll({
 
         navSelector  : "div.pagination",
@@ -42,6 +30,9 @@ var matrix = {
                        // selector for the NEXT link (to page 2)
         itemSelector : "#matrix div.uri"
                        // selector for all items you'll retrieve
+      },
+      function(new_elements) {
+        url.setup( $(new_elements) )
       });
   }
 
