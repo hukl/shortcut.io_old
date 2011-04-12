@@ -1,0 +1,9 @@
+javascripts:
+  workspace:
+    - public/javascripts/jquery.min.js
+    - public/javascripts/rails.js
+    - public/javascripts/json2.js
+    - public/javascripts/underscore-min.js
+    - public/javascripts/handlebars-0.9.0.pre.5.js
+    - public/javascripts/backbone-min.js
+    - public/javascripts/application.js
