@@ -81,13 +81,18 @@ $(document).ready(function() {
 
     delete_url : function() {
       var delete_url = confirm("Are you sure?");
-      this.model.destroy();
-      this.model.view.remove();
+
+      this.model.destroy({
+        success : function(model, response) {
+          model.view.remove();
+          UrlStore.fetch();
+        }
+      });
+
       return false;
     },
 
     render: function() {
-      console.log("WOOT");
       $(this.el).html(this.template(this.model.attributes));
       return this;
     },
@@ -164,7 +169,14 @@ $(document).ready(function() {
     },
 
     add_all : function() {
-      UrlStore.each(this.add_one);
+      var items = [];
+
+      UrlStore.each(function(e) {
+        var view = new UrlPartial({model : e});
+        items.push(view.render().el)
+      });
+
+      this.el.html(items)
     }
 
   })
