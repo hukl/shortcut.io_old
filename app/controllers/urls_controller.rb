@@ -69,13 +69,11 @@ class UrlsController < ApplicationController
   def update
     @url = Url.find( params[:id] )
 
-    tags = params[:url].delete( :tags )
-
-    params[:url].merge!(:account_id => current_account.id)
+    tags = params.delete( :tags )
 
     @url.tag_list = tags
 
-    if @url.update_attributes( params[:url] )
+    if @url.update_attributes( params )
       render :json => {:status => :ok}.to_json
     else
       render :json => {:status => :error}.to_json
@@ -83,6 +81,13 @@ class UrlsController < ApplicationController
   end
 
   def destroy
+    url = Url.find( params[:id] )
+    url.destroy if url
+
+    respond_to do |format|
+      format.html {}
+      format.js { render :json => {:status => :ok} }
+    end
   end
 
   def search

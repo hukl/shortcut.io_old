@@ -3,15 +3,8 @@
   <head>
     <title>shortcut.io | <%= params[:action] %></title>
     <%= stylesheet_link_tag :all %>
-    <%= javascript_include_tag(
-          'jquery.min',
-          'handlebars-0.9.0.pre.5',
-          'json2',
-          'underscore-min',
-          'backbone-min',
-          'application'
-        ) %>
     <%= csrf_meta_tag %>
+    <%= include_javascripts :workspace %>
   </head>
   <body>
     <div>

@@ -44,9 +44,11 @@ $(document).ready(function() {
     className   : 'uri',
 
     events      : {
-      "mouseover"       : "show_meta",
-      "mouseout"        : "hide_meta",
-      "click .edit_url" : "show_edit_widget"
+      "mouseover"         : "show_meta",
+      "mouseout"          : "hide_meta",
+      "click .edit_url"   : "display_edit_widget",
+      "click .show_url"   : "display_show_widget",
+      "click .delete_url" : "delete_url"
     },
 
     initialize : function() {
@@ -67,9 +69,20 @@ $(document).ready(function() {
       $(this.el).find(".meta").hide()
     },
 
-    show_edit_widget : function() {
+    display_edit_widget : function() {
       var view = new EditUrlView({model : this.model});
       view.render();
+      return false;
+    },
+
+    display_show_widget : function() {
+      return false;
+    },
+
+    delete_url : function() {
+      var delete_url = confirm("Are you sure?");
+      this.model.destroy();
+      this.model.view.remove();
       return false;
     },
 
@@ -85,7 +98,8 @@ $(document).ready(function() {
     id        : 'edit_url_view',
 
     events    : {
-      "reset form" : "close"
+      "reset form"  : "close",
+      "submit form" : "submit"
     },
 
     initialize : function() {
@@ -110,6 +124,23 @@ $(document).ready(function() {
       $(this.el).show();
 
       return this;
+    },
+
+    serialize : function() {
+      return {
+        title       : this.$('input[name="url[title]"]').val(),
+        description : this.$('textarea[name="url[description]"]').val(),
+        uri         : this.$('input[name="url[uri]"]').val(),
+        tags        : this.$('input[name="url[tags]"]').val()
+      }
+    },
+
+    submit : function() {
+      console.log(this.model.get('id'))
+      this.model.set(this.serialize())
+      this.model.save()
+      $(this.el).remove()
+      return false
     },
 
     close : function() {

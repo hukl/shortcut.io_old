@@ -22,6 +22,12 @@ class Url < ActiveRecord::Base
 
   ActiveRecord::Base.include_root_in_json = false
 
+  def action= name
+  end
+
+  def controller= name
+  end
+
   def to_json(options = {})
     super(options.merge(
       :only => [ :id, :title, :created_at, :description, :uri, :image_uuid])
