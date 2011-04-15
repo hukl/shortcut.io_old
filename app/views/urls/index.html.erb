@@ -5,7 +5,7 @@
 
 <script id="url_template" type="text/x-handlebars-template">
     <a href="{{uri}}">
-      <img src="{{thumbnail_url_200 image_uuid}}" height="200" width="200" />
+      <img src="{{{thumbnail_url image_uuid "200"}}}" height="200" width="200" />
     </a>
     <div class="meta">
       <a href="#" class="show_url"><img src="/images/eye_icon_16.png" height="16" width="16" /></a>
@@ -20,7 +20,7 @@
 
 <script id="edit_url_template" type="text/x-handlebars-template">
     <div class="thumbnail_frame">
-      <img src="{{thumbnail_url_300 image_uuid}}" width="300px" height="300px"/>
+      <img src="{{{thumbnail_url image_uuid "300"}}}" width="300px" height="300px"/>
     </div>
     <form action="#">
       <p>
