@@ -8,7 +8,7 @@ class UrlsController < ApplicationController
       format.js do
         @urls = Url.where(:account_id => current_account.id).paginate(
           :page     => params[:page],
-          :per_page => 20,
+          :per_page => 15,
           :order    => "created_at DESC"
         )
 
@@ -57,6 +57,7 @@ class UrlsController < ApplicationController
     }}
 
     respond_to do |format|
+      format.html {}
       format.js do
         render :json => response.to_json
       end
