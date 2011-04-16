@@ -189,16 +189,42 @@ div#matrix div.uri img {
 
 div#matrix div.uri div.meta {
   position: absolute;
-  top: 165px;
+  top: 169px;
   right: 6px;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
-  display: none;
+  height: 16px;
+  background-color: #ffffff;
   border-top: 1px solid #d1d1d1;
   border-left: 1px solid #d1d1d1;
   -moz-border-radius-topleft: 5px;
   -webkit-border-radius-topleft: 5px;
   border-top-left-radius:5px;
+  opacity: 0;
+}
+
+div#matrix div.uri div.meta.active {
+  opacity: 100;
+}
+
+div.meta a {
+  display:block;
+  width: 16px;
+  height: 16px;
+  float: left;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+a.show_url {
+  background-image: url(/images/eye_icon_16.png);
+}
+
+a.edit_url {
+  background-image: url(/images/doc_edit_icon_16.png);
+}
+
+a.delete_url {
+  background-image: url(/images/delete_icon_16.png);
 }
 
 div#matrix div.uri div.meta img {
@@ -245,7 +271,7 @@ div#edit_url_view {
      -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
           box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   text-align: left;
-  font-size: 12px; 
+  font-size: 12px;
 }
 
 div#edit_url_view p {

@@ -21,11 +21,11 @@ var UrlPartial = Backbone.View.extend({
   },
 
   show_meta : function() {
-    $(".meta", this.el).show()
+    $(".meta", this.el).addClass("active")
   },
 
   hide_meta : function() {
-    $(".meta", this.el).hide()
+    $(".meta", this.el).removeClass("active")
   },
 
   display_edit_widget : function() {
