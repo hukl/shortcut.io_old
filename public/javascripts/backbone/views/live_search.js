@@ -29,6 +29,7 @@ $(document).ready(function() {
           this.get_results( $('#search_results table tr.selected') );
           break;
         case 27:
+          $('#search_results').hide()
           break;
         case 38:
           this.select_prev();
@@ -116,7 +117,7 @@ $(document).ready(function() {
 
       if (query === "all") {
         console.log("no")
-
+        $('#search_results').hide()
         SearchResults.refresh([])
         UrlStore.trigger('refresh')
       } else {
@@ -129,10 +130,11 @@ $(document).ready(function() {
     },
 
     update_results : function(response) {
+      SearchResults.refresh([])
       for (var i=0; i<response.length; i++) {
         SearchResults.add(response[i])
       }
-
+      $('#search_results').hide()
       SearchResults.trigger('refresh')
     }
 
@@ -141,71 +143,3 @@ $(document).ready(function() {
   new LiveSearch
 
 })
-
-
-/*
-
-
-var search_results = {
-  init : function() {
-
-    $("#live_search").bind("keydown", function( event ) {
-      if (event.which == 40) {
-        search_results.select_next();
-        return false;
-      } else if (event.which == 38) {
-        search_results.select_prev();
-        return false;
-      }
-    });
-
-    $(document).bind('click', function() {
-      if ( $('#search_results').is(':visible') ) {
-        search_results.hide();
-      }
-    })
-  },
-
-
-
-
-  show : function() {
-    var elem = $("#search_results");
-    if (elem.is(":hidden")) {
-      $("#search_results").show();
-      $(document).bind("keyup", function(event) {
-        if (event.which == 13) {
-          search_results.get_results( $('#search_results table tr.selected') );
-          search_results.hide();
-          return false;
-        }
-      });
-    }
-  },
-
-  hide : function() {
-    var elem = $("#search_results");
-    if (elem.is(":visible")) {
-      $("#search_results").hide();
-      $(document).unbind('keyup');
-    }
-  },
-
-  query_server : function( options ) {
-    $.ajax({
-      url       : '/urls/search?query=' + options.query + '&query_type=' + options.query_type,
-      type      : 'POST',
-      dataType  : options.dataType,
-      success   : options.success
-    });
-  },
-
-  update_matrix : function( results ) {
-    $('#matrix').html(results);
-    matrix.init();
-  },
-
-
-}
-
-*/
