@@ -6,10 +6,13 @@ class UrlsController < ApplicationController
     respond_to do |format|
       format.html {}
       format.js do
-        @urls = Url.where(:account_id => current_account.id).paginate(
+        @urls = Url.where(
+          :account_id => 4
+        ).order(
+          "created_at DESC"
+        ).paginate(
           :page     => params[:page],
-          :per_page => 20,
-          :order    => "created_at DESC"
+          :per_page => 20
         )
 
         render :json => @urls
