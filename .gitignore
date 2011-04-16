@@ -6,3 +6,5 @@ db/sphinx
 db/*.backup
 log/searchd.*
 config/*.sphinx.conf
+public/assets/*
+
