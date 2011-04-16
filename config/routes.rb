@@ -4,14 +4,14 @@ Frontend::Application.routes.draw do
   post  "tools/convert"
 
   devise_for :accounts
-  
+
   resource :account
 
   get "home/index"
 
   resources :urls do
     collection do
-      post 'search'
+      get 'search'
     end
   end
 

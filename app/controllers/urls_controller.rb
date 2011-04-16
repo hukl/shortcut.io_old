@@ -107,7 +107,7 @@ class UrlsController < ApplicationController
       ).tagged_with( params[:query] )
     end
 
-    render :partial => @urls
+    render :json => @urls
   end
 
   def search_for query

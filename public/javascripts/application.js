@@ -12,13 +12,16 @@ $(document).ready(function() {
     initialize : function() {
       _.bindAll(this, 'add_all', 'add_one', 'render');
       UrlStore.bind('all', this.render);
+      UrlStore.bind('add', this.add_one)
       UrlStore.bind('refresh', this.add_all);
+      SearchResults.bind('refresh', this.add_all_results);
+      SearchResults.bind('remove', this.remove_one_result);
       UrlStore.fetch();
     },
 
     add_one : function(url) {
       var view = new UrlPartial({model : url});
-      this.el.append(view.render().el);
+      $('#matrix', this.el).append(view.render().el);
     },
 
     add_all : function() {
@@ -29,14 +32,29 @@ $(document).ready(function() {
         items.push(view.render().el)
       });
 
-      $('#matrix', this.el).append(items)
+      $('#matrix', this.el).html(items)
+    },
+
+    add_all_results : function() {
+      var items = [];
+
+      SearchResults.each(function(e) {
+        var view = new UrlPartial({model : e});
+        items.push(view.render().el)
+      });
+
+      $('#matrix', this.el).html(items)
+    },
+
+    remove_one_result : function( url ) {
+      url.view.remove();
     },
 
     fetch_more : function() {
       console.log("oh")
-      UrlStore.fetch()
+      UrlStore.next_page()
       return false;
-    },
+    }
 
   })
 
