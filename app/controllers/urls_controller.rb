@@ -9,7 +9,7 @@ class UrlsController < ApplicationController
       format.html {}
       format.js do
         @urls = Url.where(
-          :account_id => 4
+          :account_id => current_account.id
         ).order(
           "created_at DESC"
         ).paginate(

@@ -121,6 +121,11 @@ div#toolbar div#session {
   left: 0px;
 }
 
+div#toolbar div#bookmarklet {
+  position: absolute;
+  left: 300px;
+}
+
 /* Search Results */
 
 div#search_results {

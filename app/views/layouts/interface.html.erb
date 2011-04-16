@@ -21,6 +21,13 @@
 
     <% if current_account %>
     <div id="toolbar">
+      <div id="session">
+        <%= current_account.username %>
+        <%= link_to 'logout', destroy_session_path(current_account) %>
+      </div>
+      <div id="bookmarklet">
+        <%= link_to 'Shortcut.io', bookmarklet %>
+      </div>
       <div id="search">
         <input type="text" id="live_search" autofocus />
       </div>
