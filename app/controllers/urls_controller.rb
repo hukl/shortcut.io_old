@@ -8,7 +8,7 @@ class UrlsController < ApplicationController
       format.js do
         @urls = Url.where(:account_id => current_account.id).paginate(
           :page     => params[:page],
-          :per_page => 15,
+          :per_page => 20,
           :order    => "created_at DESC"
         )
 

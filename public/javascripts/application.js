@@ -25,7 +25,7 @@ $(document).ready(function() {
         items.push(view.render().el)
       });
 
-      this.el.html(items)
+      this.el.append(items)
     }
 
   })
