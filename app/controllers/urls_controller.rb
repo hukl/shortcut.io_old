@@ -2,6 +2,8 @@ class UrlsController < ApplicationController
 
   before_filter :authenticate_account!
 
+  layout 'interface'
+
   def index
     respond_to do |format|
       format.html {}

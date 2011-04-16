@@ -4,7 +4,6 @@
     <title>shortcut.io | <%= params[:action] %></title>
     <%= stylesheet_link_tag :all %>
     <%= csrf_meta_tag %>
-    <%= include_javascripts :workspace %>
   </head>
   <body>
     <div>
@@ -12,70 +11,9 @@
       <%= flash[:alert] %>
     </div>
 
-    <header>
-      <% unless current_account.nil? %>
-        <%= link_to 'Log out', destroy_account_session_path %>
-        <%= link_to 'Shortcut.io', bookmarklet %>
-      <% end %>
-    </header>
-
-    <% if current_account %>
-    <div id="toolbar">
-      <div id="search">
-        <input type="text" id="live_search" autofocus />
-      </div>
-    </div>
-
-    <div id="search_results">
-      <table>
-        <tbody id="filter_search">
-          <tr class="selectable">
-            <td class="search_category">Search</td>
-            <td class="search_category_result"></td>
-          </tr>
-          <tr><td>&nbsp;</td></tr>
-        </tbody>
-        <tbody id="filter_tags">
-
-        </tbody>
-        <tbody>
-          <tr><td>&nbsp;</td></tr>
-          <tr class="selectable">
-            <td class="search_category">Results</td>
-            <td class="search_category_result">TinEye Reverse Image Search</td>
-          </tr>
-          <tr class="selectable">
-            <td class="search_category"></td>
-            <td class="search_category_result">Sproutcore MVC VS Rails MVC</td>
-          </tr>
-          <tr class="selectable">
-            <td class="search_category"></td>
-            <td class="search_category_result">Backbone.js</td>
-          </tr>
-          <tr class="selectable">
-            <td class="search_category"></td>
-            <td class="search_category_result">Hi, I'm Matthew from Sydney.</td>
-          </tr>
-          <tr class="selectable">
-            <td class="search_category"></td>
-            <td class="search_category_result">CSS3 Drop Shadows</td>
-          </tr>
-        </tbody>
-      </table>
-
-    </div>
-    <% end %>
-
-    <div id="wrapper">
+    <div id='wrapper'>
       <%= yield %>
     </div>
-
-    <script id="search_result_items" type="text/x-handlebars-template">
-      <tr class="selectable">
-        <td class="search_category">{{title}}</td>
-        <td class="search_category_result">{{result}}</td>
-      </tr>
-    </script>
 
   </body>
 </html>
