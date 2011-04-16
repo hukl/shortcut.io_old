@@ -14,7 +14,7 @@ class UrlsController < ApplicationController
           "created_at DESC"
         ).paginate(
           :page     => params[:page],
-          :per_page => 50
+          :per_page => 30
         )
 
         render :json => @urls
