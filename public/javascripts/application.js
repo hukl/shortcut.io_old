@@ -3,7 +3,11 @@ $(document).ready(function() {
   window.UrlStore = new Urls;
 
   window.UrlApp = Backbone.View.extend({
-    el : $('#matrix'),
+    el : $('#wrapper'),
+
+    events : {
+      'click #more' : 'fetch_more'
+    },
 
     initialize : function() {
       _.bindAll(this, 'add_all', 'add_one', 'render');
@@ -25,11 +29,17 @@ $(document).ready(function() {
         items.push(view.render().el)
       });
 
-      this.el.append(items)
-    }
+      $('#matrix', this.el).append(items)
+    },
+
+    fetch_more : function() {
+      console.log("oh")
+      UrlStore.fetch()
+      return false;
+    },
 
   })
 
-  var App = new UrlApp;
+  window.App = new UrlApp;
 
 });

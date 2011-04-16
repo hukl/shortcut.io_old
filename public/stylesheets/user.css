@@ -305,7 +305,9 @@ div#edit_url_view form textarea, div#edit_url_view form input[type=text] {
 
 /* pagination */
 
-div.pagination {
-  position: absolute;
-  bottom: 20px;
+a#more {
+  display: block;
+  clear: both;
+  height: 20px;
+  padding: 20px;
 }
