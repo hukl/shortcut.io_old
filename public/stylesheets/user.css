@@ -244,6 +244,7 @@ div#matrix div.uri div.details {
 }
 
 div#matrix div.uri div.details h3 {
+  height: 14px;
   margin-top: 5px;
   margin-bottom: 0px;
 }
