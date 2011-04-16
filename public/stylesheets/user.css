@@ -116,6 +116,11 @@ div#toolbar div#search {
   background-color: #c0c0c0;
 }
 
+div#toolbar div#session {
+  position: absolute;
+  left: 0px;
+}
+
 /* Search Results */
 
 div#search_results {
