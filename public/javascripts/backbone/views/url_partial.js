@@ -41,12 +41,13 @@ var UrlPartial = Backbone.View.extend({
   delete_url : function() {
     var delete_url = confirm("Are you sure?");
 
-    this.model.destroy({
-      success : function(model, response) {
-        model.view.remove();
-        UrlStore.fetch();
-      }
-    });
+    if (delete_url) {
+      this.model.destroy({
+        success : function(model, response) {
+          model.view.remove();
+        }
+      });
+    }
 
     return false;
   },

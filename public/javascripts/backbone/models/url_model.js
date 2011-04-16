@@ -1,5 +1,7 @@
 var Url = Backbone.Model.extend({
-
+  url : function() {
+    return '/urls/'+ this.id
+  }
 });
 
 var Urls = Backbone.Collection.extend({
