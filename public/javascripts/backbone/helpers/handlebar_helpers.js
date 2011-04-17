@@ -5,8 +5,8 @@ Handlebars.registerHelper('truncate', function(title) {
 Handlebars.registerHelper('thumbnail_url', function(image_uuid, size) {
   var segments = [
     "http://background.shortcut.io",
-    image_uuid.substring(0,4),
-    image_uuid.substring(4,8),
+    image_uuid.substring(0,3),
+    image_uuid.substring(3,6),
     (image_uuid + "_" + size + ".jpg")
   ];
 
