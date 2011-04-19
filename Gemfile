@@ -13,6 +13,7 @@ gem 'resque'
 gem 'uuid'
 gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git'
 gem 'jammit'
+gem 'slingshot-rb'
 
 # Bundle the extra gems:
 # gem 'bj'
