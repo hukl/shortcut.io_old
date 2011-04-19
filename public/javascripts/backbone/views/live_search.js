@@ -10,7 +10,8 @@ $(document).ready(function() {
     },
 
     initialize : function() {
-      this.search_results = $('#search_results')
+      this.search_results = $('#search_results');
+      this.search_timeout = undefined;
 
       _.bindAll(this, 'handle_input');
     },
@@ -26,7 +27,6 @@ $(document).ready(function() {
     handle_input : function(event) {
       switch( event.which ) {
         case 13:
-          this.get_results( $('#search_results table tr.selected') );
           break;
         case 27:
           $('#search_results').hide()
@@ -38,106 +38,54 @@ $(document).ready(function() {
           this.select_next();
           break;
         default:
-          this.show_results();
+          this.search_with_timeout();
           break;
       }
     },
 
-    show_results : function() {
-
-      var current_value = $('#live_search').val();
-
-      if (current_value == "") {
-        $("#filter_search td.search_category_result").html("all");
-      } else {
-        $("#filter_search td.search_category_result").html(current_value);
+    search_with_timeout : function() {
+      if ( this.search_timeout != undefined ) {
+        clearTimeout(this.search_timeout);
       }
 
-      this.search_results.show();
-
-      if ($('#search_results table tr.selected').length == 0) {
-        $('#search_results table tr.selectable').first().addClass('selected');
-      }
-
-      this.compute_tags(current_value);
+      this.search_timeout = setTimeout(this.get_results, 500)
     },
 
-    select_next : function() {
-      next_item_in_group = $('tr.selected').nextAll('.selectable').first();
-      next_item_in_next_group = $('tr.selected').parent().next().children('.selectable').first();
+    get_results : function() {
+      var base_url      = 'http://localhost:9200/urls/_search?source=',
+          search_term   = $('#live_search').val();
 
-      if (0 < next_item_in_group.length) {
-        $("tr.selected").each(function() {$(this).removeClass("selected")});
-        next_item_in_group.addClass("selected");
-      } else if (0 < next_item_in_next_group.length) {
-        $("tr.selected").each(function() {$(this).removeClass("selected")});
-        next_item_in_next_group.addClass("selected");
-      }
-    },
-
-    select_prev : function() {
-      prev_item_in_group = $('tr.selected').prevAll('.selectable').first();
-      prev_item_in_next_group = $('tr.selected').parent().prev().children('.selectable').last();
-
-      if (0 < prev_item_in_group.length) {
-        $("tr.selected").each(function() {$(this).removeClass("selected")});
-        prev_item_in_group.addClass("selected");
-      } else if (0 < prev_item_in_next_group.length) {
-        $("tr.selected").each(function() {$(this).removeClass("selected")});
-        prev_item_in_next_group.addClass("selected");
-      }
-    },
-
-    compute_tags : function( current_input ) {
-      var container = $('#filter_tags')
-      var tags      = current_input.split(",");
-      var source    = $("#search_result_items").html();
-      var template  = Handlebars.compile(source);
-
-      if ( 1 < tags.length ) { tags.unshift(current_input) };
-
-      result = [];
-
-      for (var i=0; i<tags.length; i++) {
-        if (i == 0) {
-          var context = {title: "Tags", result: tags[i]};
-        } else {
-          var context = {title: "", result: tags[i]};
-        }
-        var html = template(context);
-        result.push(html);
-      }
-
-      $('#filter_tags').html(result.join());
-    },
-
-    get_results : function(element) {
-      var query_type  = element.parent().attr('id'),
-          query       = element.children('.search_category_result').text();
-
-      if (query === "all") {
-        console.log("no")
-        $('#search_results').hide()
+      if (_.isEmpty(search_term)) {
         SearchResults.refresh([])
         UrlStore.trigger('refresh')
       } else {
-        SearchResults.get_results_for({
-          query       : query,
-          query_type  : query_type,
-          success     : this.update_results
-        });
-      }
-    },
+        query_params = {
+          query : {
+            query_string : {
+              query : search_term
+            }
+          },
+          filter : {
+            term : {
+              account_id : 1
+            }
+          },
+          size : 30
+        }
 
-    update_results : function(response) {
-      SearchResults.refresh([])
-      for (var i=0; i<response.length; i++) {
-        SearchResults.add(response[i])
+        $.ajax({
+          url : base_url + encodeURIComponent(JSON.stringify(query_params)),
+          dataType: 'jsonp',
+          success : function(response) {
+            SearchResults.refresh(
+              _.map(response.hits.hits, function(element) {
+                return element._source
+              })
+            )
+          }
+        })
       }
-      $('#search_results').hide()
-      SearchResults.trigger('refresh')
     }
-
   })
 
   new LiveSearch
