@@ -29,6 +29,11 @@ var Urls = Backbone.Collection.extend({
 });
 
 var Results = Backbone.Collection.extend({
+
+  url           : function() {
+    return '/urls'
+  },
+
   model : Url,
 
   get_results_for : function( options ) {
