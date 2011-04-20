@@ -5,6 +5,8 @@ class Url < ActiveRecord::Base
   belongs_to    :account
   before_create :create_image_uuid
   after_create  :create_thumbnail
+  after_save    :update_index
+  after_destroy :delete_from_index
 
   validates_presence_of   :account_id
   validates_uniqueness_of :uri,         :scope => :account_id
@@ -41,6 +43,30 @@ class Url < ActiveRecord::Base
 
   def create_thumbnail
     Resque.enqueue( Thumbnail, self.uri, self.image_uuid )
+  end
+
+  def update_index
+
+    url = self
+
+    #Slingshot::Client::RestClient.delete("http://localhost:9200/urls/document/#{self.id}")
+    Slingshot.index('urls') do
+      store(
+        :id           => url.id,
+        :title        => url.title,
+        :description  => url.description,
+        :uri          => url.uri,
+        :tags         => url.tag_list,
+        :image_uuid   => url.image_uuid,
+        :account_id   => url.account.id
+      )
+
+      refresh
+    end
+  end
+
+  def delete_from_index
+    Slingshot::Client::RestClient.delete("http://localhost:9200/urls/document/#{self.id}")
   end
 
 end
