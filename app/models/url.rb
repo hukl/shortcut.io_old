@@ -9,17 +9,6 @@ class Url < ActiveRecord::Base
   validates_presence_of   :account_id
   validates_uniqueness_of :uri,         :scope => :account_id
 
-  define_index do
-    indexes uri
-    indexes title
-    indexes description
-    has created_at
-
-    has account_id
-
-    set_property :delta => true
-  end
-
   ActiveRecord::Base.include_root_in_json = false
 
   def action= name
