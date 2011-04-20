@@ -19,10 +19,15 @@ class Url < ActiveRecord::Base
   def controller= name
   end
 
-  def to_json(options = {})
-    super(options.merge(
-      :only => [ :id, :title, :created_at, :description, :uri, :image_uuid])
-    )
+  def to_hash
+    {
+      :id           => id,
+      :title        => title,
+      :description  => description,
+      :uri          => uri,
+      :image_uuid   => image_uuid,
+      :tags         => tag_list.join(", ")
+    }
   end
 
   def generate_image_uuid

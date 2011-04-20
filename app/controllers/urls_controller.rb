@@ -17,7 +17,7 @@ class UrlsController < ApplicationController
           :per_page => 30
         )
 
-        render :json => @urls
+        render :json => @urls.map { |u| u.to_hash }
       end
     end
   end
@@ -52,14 +52,7 @@ class UrlsController < ApplicationController
   def show
     url = Url.find( params[:id] )
 
-    response = { :url => {
-      :id           => url.id,
-      :title        => url.title,
-      :description  => url.description,
-      :uri          => url.uri,
-      :thumbnail    => url.thumbnail_url(300),
-      :tags         => url.tag_list
-    }}
+    response = { :url => url.to_hash }
 
     respond_to do |format|
       format.html {}
@@ -80,9 +73,9 @@ class UrlsController < ApplicationController
     @url.tag_list = tags
 
     if @url.update_attributes( params )
-      render :json => {:status => :ok}.to_json
+      render :nothing => true
     else
-      render :json => {:status => :error}.to_json
+      render :nothing => true
     end
   end
 
