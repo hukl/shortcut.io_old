@@ -1,5 +1,3 @@
-require 'slingshot-rb'
-
 namespace :search do
 
   desc "import all bookmarks in es"
