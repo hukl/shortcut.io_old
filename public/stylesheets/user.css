@@ -90,15 +90,23 @@ div#toolbar {
   position: fixed;
   top: 0px;
   height: 50px;
+  color: #f1f1f1;
   background-color: #cccccc;
+  background-image: url(/images/toolbar_back.png);
+  background-repeat: repeat-x;
   width: 100%;
   z-index: 999;
+  border-bottom: 1px solid #ffffff;
+}
+
+div#toolbar a {
+  color: #f1f1f1;
 }
 
 div#toolbar input[type=text] {
   position: absolute;
   right: 20px;
-  width: 250px;
+  width: 300px;
   font-size: 14px;
   border: 1px solid #f1f1f1;
   color: #7e7e7e;
@@ -114,17 +122,18 @@ div#toolbar div#search {
   right: 20px;
   width: 300px;
   height: 50px;
-  background-color: #c0c0c0;
 }
 
 div#toolbar div#session {
   position: absolute;
-  left: 0px;
+  left: 20px;
+  top: 15px;
 }
 
 div#toolbar div#bookmarklet {
   position: absolute;
-  left: 300px;
+  left: 200px;
+  top: 15px;
 }
 
 /* Search Results */

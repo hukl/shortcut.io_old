@@ -22,11 +22,13 @@
     <% if current_account %>
     <div id="toolbar">
       <div id="session">
-        <%= current_account.username %>
+        <%= current_account.username %> |
         <%= link_to 'logout', destroy_session_path(current_account) %>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <%= link_to 'Tools', tools_import_path %>
       </div>
       <div id="bookmarklet">
-        <%= link_to 'Shortcut.io', bookmarklet %>
+        <%= link_to 'Post on Shortcut.io', bookmarklet, :title => "Bookmarklet" %>
       </div>
       <div id="search">
         <input type="text" id="live_search" autofocus />
