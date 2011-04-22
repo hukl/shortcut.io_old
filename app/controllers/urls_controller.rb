@@ -72,7 +72,7 @@ class UrlsController < ApplicationController
     @url.tag_list = tags
 
     if @url.update_attributes( params )
-      render :nothing => true
+      render :json => @url.to_hash
     else
       render :nothing => true
     end

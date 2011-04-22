@@ -41,13 +41,11 @@ var EditUrlView = Backbone.View.extend({
   },
 
   submit : function() {
-    this.model.set(this.serialize())
     this.model.save(this.serialize(), {
-      success : function() {
-        console.log("foo")
+      success : function(model, response) {
+        model.view.close()
       }
     })
-    this.close()
     return false
   },
 
