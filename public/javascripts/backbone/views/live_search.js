@@ -52,38 +52,15 @@ $(document).ready(function() {
     },
 
     get_results : function() {
-      var base_url      = 'http://localhost:9200/urls/_search?source=',
-          search_term   = $('#live_search').val();
+      var search_term   = $('#live_search').val();
 
       if (_.isEmpty(search_term)) {
         SearchResults.refresh([])
         UrlStore.trigger('refresh')
       } else {
-        query_params = {
-          query : {
-            query_string : {
-              query : search_term
-            }
-          },
-          filter : {
-            term : {
-              account_id : 1
-            }
-          },
-          size : 30
-        }
-
-        $.ajax({
-          url : base_url + encodeURIComponent(JSON.stringify(query_params)),
-          dataType: 'jsonp',
-          success : function(response) {
-            SearchResults.refresh(
-              _.map(response.hits.hits, function(element) {
-                return element._source
-              })
-            )
-          }
-        })
+        SearchResults.current_page = 0;
+        SearchResults.refresh([])
+        SearchResults.next_page( search_term )
       }
     }
   })

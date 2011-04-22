@@ -15,6 +15,7 @@ $(document).ready(function() {
       UrlStore.bind('add', this.add_one)
       UrlStore.bind('refresh', this.add_all);
       SearchResults.bind('refresh', this.add_all_results);
+      SearchResults.bind('add', this.add_one);
       SearchResults.bind('remove', this.remove_one_result);
       UrlStore.fetch();
     },
@@ -51,8 +52,12 @@ $(document).ready(function() {
     },
 
     fetch_more : function() {
-      console.log("oh")
-      UrlStore.next_page()
+      if (0 < SearchResults.size()) {
+        SearchResults.next_page($('#live_search').val())
+      } else {
+        UrlStore.next_page()
+      }
+
       return false;
     }
 
