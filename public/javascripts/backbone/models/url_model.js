@@ -18,7 +18,6 @@ var Urls = Backbone.Collection.extend({
       url : '/urls?page=' + this.current_page,
       dataType: 'json',
       success : function( res ) {
-        console.log(res.length)
         UrlStore.add(res)
       }
     })

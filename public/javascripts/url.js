@@ -21,7 +21,6 @@ var url = {
 
       $(this).find("a.edit_url").bind("click", function() {
         url.edit( $(this).attr("rel") );
-        console.log("foo")
         return false;
       })
     })
@@ -55,7 +54,6 @@ var url = {
     url.find({
       url_id    : url_id,
       callback  : function(response) {
-        console.log(response);
         if (0 < (element = $('#edit_url_view')).length) {
           element.replaceWith(template(response));
         } else {
@@ -79,7 +77,6 @@ var url = {
         url_id    : $('#edit_url_view form input[type=hidden]').val(),
         data      : $('#edit_url_view form').serialize(),
         callback  : function(response) {
-          console.log(response);
           $("#edit_url_view").remove();
         }
       });

@@ -44,6 +44,9 @@ var EditUrlView = Backbone.View.extend({
     this.model.save(this.serialize(), {
       success : function(model, response) {
         model.view.close()
+      },
+      error   : function(model, response) {
+        console.log("error: " + response)
       }
     })
     return false
