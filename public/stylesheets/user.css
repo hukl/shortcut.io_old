@@ -206,8 +206,8 @@ div#matrix div.uri img {
 
 div#matrix div.uri div.meta {
   position: absolute;
-  top: 169px;
-  right: 6px;
+  top: 170px;
+  right: 7px;
   padding: 10px;
   height: 16px;
   background-color: #ffffff;
@@ -223,14 +223,17 @@ div#matrix div.uri div.meta.active {
   opacity: 100;
 }
 
-div.meta a {
+div#matrix div.uri div.meta a {
   display:block;
   width: 16px;
   height: 16px;
   float: left;
   margin-right: 5px;
   margin-left: 5px;
+  border: none;
 }
+
+
 
 a.show_url {
   background-image: url(/images/eye_icon_16.png);
