@@ -88,6 +88,26 @@ class UrlsController < ApplicationController
     end
   end
 
+  def search
+    search_term = params[:search_term] || "*"
+    page        = params[:page] || 0
+    account_id  = current_account.id
+
+    s = Slingshot.search 'urls' do
+      query do
+        string search_term
+      end
+
+      filter :term, :account_id => account_id
+
+      size(30)
+
+      from page.to_i * 30
+    end
+
+    render :json => s.results
+  end
+
   private
 
   def verify_ownership

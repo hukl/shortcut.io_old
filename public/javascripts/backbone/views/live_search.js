@@ -12,16 +12,13 @@ $(document).ready(function() {
     initialize : function() {
       this.search_results = $('#search_results');
       this.search_timeout = undefined;
+      this.current_value = "";
 
       _.bindAll(this, 'handle_input');
     },
 
     render : function() {
       return this;
-    },
-
-    current_value : function() {
-      return $('#live_search').val();
     },
 
     handle_input : function(event) {
@@ -51,20 +48,27 @@ $(document).ready(function() {
       this.search_timeout = setTimeout(this.get_results, 500)
     },
 
+    input_value_has_changed : function() {
+      this.current_value === $('#live_search').val();
+    },
+
     get_results : function() {
       var search_term   = $('#live_search').val();
 
-      if (_.isEmpty(search_term)) {
-        SearchResults.refresh([])
-        UrlStore.trigger('refresh')
-      } else {
-        SearchResults.current_page = 0;
-        SearchResults.refresh([])
-        SearchResults.next_page( search_term )
+      if (Search.current_value != search_term) {
+        if (_.isEmpty(search_term)) {
+          SearchResults.refresh([])
+          UrlStore.trigger('refresh')
+        } else {
+          SearchResults.current_page = 0;
+          SearchResults.next_page( search_term )
+        }
+
+        Search.current_value = search_term
       }
     }
   })
 
-  new LiveSearch
+  window.Search = new LiveSearch
 
 })

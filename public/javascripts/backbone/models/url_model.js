@@ -35,37 +35,26 @@ var Results = Backbone.Collection.extend({
 
   model : Url,
 
-  query_params : function( search_term ) {
-    var query_params = {
-      query : {
-        query_string : {
-          query : search_term
-        }
-      },
-      filter : {
-        term : {
-          account_id : 4
-        }
-      },
-      from : (this.current_page * this.per_page),
-      size : this.per_page
-    }
-
-    this.current_page++;
-
-    return encodeURIComponent(JSON.stringify( query_params ))
-  },
-
   next_page : function( search_term ) {
     $.ajax({
-      url : this.base_url + this.query_params(search_term),
-      dataType: 'jsonp',
+      url : '/urls/search?' + 'search_term=' + search_term + '&page=' + this.current_page,
+      dataType: 'json',
       success : function(response) {
-        SearchResults.add(
-          _.map(response.hits.hits, function(element) {
-            return element._source
-          })
-        )
+        if (SearchResults.current_page == 0) {
+          SearchResults.refresh(
+            _.map(response, function(element) {
+              return element._source
+            })
+          )
+        } else {
+          SearchResults.add(
+            _.map(response, function(element) {
+              return element._source
+            })
+          )
+        }
+
+        SearchResults.current_page++;
       }
     })
   }
