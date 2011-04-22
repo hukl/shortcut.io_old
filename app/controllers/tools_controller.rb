@@ -34,8 +34,4 @@ class ToolsController < ApplicationController
     redirect_to :controller => :home, :action => :index
   end
 
-  def thumbnails
-    @urls = Url.all
-  end
-
 end
