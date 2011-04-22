@@ -1,6 +1,7 @@
 class UrlsController < ApplicationController
 
   before_filter :authenticate_account!
+  before_filter :verify_ownership, :only => :update
 
   layout 'interface'
 
@@ -66,8 +67,6 @@ class UrlsController < ApplicationController
   end
 
   def update
-    @url = Url.find( params[:id] )
-
     tags = params.delete( :tags )
 
     @url.tag_list = tags
@@ -89,33 +88,14 @@ class UrlsController < ApplicationController
     end
   end
 
-  def search
-    case params[:query_type]
+  private
 
-    when 'filter_search'
-      @urls = search_for( params[:query] )
-    when 'filter_tags'
-      @urls = Url.where(
-        :account_id => current_account.id
-      ).tagged_with( params[:query] )
+  def verify_ownership
+    @url = Url.find( params[:id] )
+
+    if @url.account_id != current_account.id
+      render :nothing => true, :status => 401
+      return
     end
-
-    render :json => @urls
-  end
-
-  def search_for query
-    if query =~ /^all$/
-      sphinx_query = ""
-    else
-      sphinx_query = "*" + query + "*"
-    end
-
-    @urls = Url.search(
-      sphinx_query,
-      :with       => { :account_id => current_account.id },
-      :limit      => 20,
-      :sort_mode => :extended,
-      :order => "created_at DESC"
-    )
   end
 end
