@@ -87,11 +87,12 @@ div#sign_in_box a:hover {
 /* Toolbar */
 
 div#toolbar {
-  position: absolute;
+  position: fixed;
   top: 0px;
   height: 50px;
   background-color: #cccccc;
   width: 100%;
+  z-index: 999;
 }
 
 div#toolbar input[type=text] {
