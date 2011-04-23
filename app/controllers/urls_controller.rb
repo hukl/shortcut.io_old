@@ -7,17 +7,17 @@ class UrlsController < ApplicationController
 
   def index
     respond_to do |format|
+      @urls = Url.where(
+        :account_id => current_account.id
+      ).order(
+        "created_at DESC"
+      ).paginate(
+        :page     => params[:page],
+        :per_page => 30
+      )
+
       format.html {}
       format.js do
-        @urls = Url.where(
-          :account_id => current_account.id
-        ).order(
-          "created_at DESC"
-        ).paginate(
-          :page     => params[:page],
-          :per_page => 30
-        )
-
         render :json => @urls.map { |u| u.to_hash }
       end
     end

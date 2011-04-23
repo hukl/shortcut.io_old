@@ -17,7 +17,7 @@ $(document).ready(function() {
       SearchResults.bind('refresh', this.add_all_results);
       SearchResults.bind('add', this.add_one);
       SearchResults.bind('remove', this.remove_one_result);
-      UrlStore.fetch();
+      UrlStore.refresh(window.InitialData)
     },
 
     add_one : function(url) {

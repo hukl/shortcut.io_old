@@ -4,6 +4,10 @@
   M O R E
 </a>
 
+<script>
+    window.InitialData = <%= (@urls.map { |u| u.to_hash }).to_json.html_safe %>
+</script>
+
 <script id="url_template" type="text/x-handlebars-template">
     <a href="{{uri}}">
       <img src="{{{thumbnail_url image_uuid "200"}}}" height="200" width="200" />
