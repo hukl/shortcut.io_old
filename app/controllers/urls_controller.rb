@@ -89,7 +89,7 @@ class UrlsController < ApplicationController
   end
 
   def search
-    search_term = params[:search_term] || "*"
+    search_term = "#{params[:search_term]}*"
     page        = params[:page] || 0
     account_id  = current_account.id
 
