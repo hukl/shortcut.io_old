@@ -24,7 +24,7 @@ function runthis() {
 
   jQuery('#shortcut_bookmarklet').css({
     "z-index": "1000",
-    "height": "400px",
+    "height": "440px",
     "width":  "460px",
     "position": "fixed",
     "top": "20px",
@@ -32,7 +32,8 @@ function runthis() {
     "border": "solid 2px #9b9b9b",
     "-moz-border-radius": "5px",
     "-webkit-border-radius": "5px",
-    "border-radius": "5px"
+    "border-radius": "5px",
+    "overflow" : "hidden"
   });
 }
 

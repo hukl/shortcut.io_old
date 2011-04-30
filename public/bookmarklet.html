@@ -4,33 +4,63 @@
     <title>Hello</title>
     <style>
       body {
+        font-family: Helvetica, Arial, sans-serif;
         background-color: #ffffff;
         padding: 0px;
-        margin: 20px;
+        margin: 40px;
+      }
+
+      h3 {
+        margin-top: 0px;
+        color: #747C82;
+      }
+
+      div#bookmarklet_wrapper p.right {
+        text-align: right;
+        width: 380px;
+        margin-top: 30px;
+      }
+
+      div#bookmarklet_wrapper p label {
+        color: #747C82;
+        font-size: 14px;
       }
 
       div#bookmarklet_wrapper input, div#bookmarklet_wrapper textarea{
-        font-size: 18px;
-        width: 420px;
-        border: solid 1px #9b9b9b;
+        font-size: 14px;
+        width: 380px;
+        border: solid 1px #D1D1D1;
         -moz-border-radius: 3px;
         -webkit-border-radius: 3px;
         border-radius: 3px;
         padding: 5px;
         font-family: Helvetica;
-
+        color: #747C82;
       }
 
-      div#bookmarklet_wrapper input[type=submit] {
+      div#bookmarklet_wrapper input[type=submit], div#bookmarklet_wrapper input[type=reset] {
+        width: 100px;
         border: 1px solid #b9b9b9;
-        background-color: #a6cc64;
-        font-size: 18px;
-        color: #3e3e3e;
-        padding: 10 20 10 20px;
+        color: #ffffff;
+        padding: 5 20 3 20px;
         -moz-border-radius: 5px;
         -webkit-border-radius: 5px;
         border-radius: 5px;
         background:-webkit-gradient(linear; 0% 20%, 0% 100%, from(#dddddd), to(#b1b1b1));
+      }
+
+      div#bookmarklet_wrapper input[type=submit] {
+        background-color: #747c82;
+        margin-left: 5px;
+      }
+
+      div#bookmarklet_wrapper input[type=submit]:active,
+      div#bookmarklet_wrapper input[type=reset]:active {
+        background-color: #51575b;
+      }
+
+      div#bookmarklet_wrapper input[type=reset] {
+        background-color: #9ca6ad;
       }
 
     </style>
@@ -41,15 +71,30 @@
 
   <body>
     <div id="bookmarklet_wrapper">
+      <h3>Post on shortcut.io</h3>
       <form action='#'>
-        <p><input id="url" name="[url]uri" type='url' value='' /></p>
-        <p><input id="title" name="[url]title" type='text', value='' /></p>
-        <p><textarea name="[url]description" autofocus></textarea></p>
-        <p><input type='text' name="[url]tags" placeholder='tags - comma separated' /></p>
+        <p>
+          <label for="[url]uri">URL</label><br />
+          <input id="url" name="[url]uri" type='url' value='' />
+        </p>
+        <p>
+          <label for="[url]title">Title</label><br />
+          <input id="title" name="[url]title" type='text', value='' />
+        </p>
+        <p>
+          <label for="[url]description">Description</label><br />
+          <textarea name="[url]description" autofocus></textarea>
+        </p>
+        <p>
+          <label for="[url]tags">Tags</label><br />
+          <input type='text' name="[url]tags" placeholder='tags - comma separated' />
+        </p>
         <input id='referrer' type='hidden' name='[url]referrer' />
-        <p><input id='send_button' type='submit' value='Add Bookmark' /></p>
+        <p class="right">
+          <input type="reset" value="Cancel" />
+          <input type='submit' value='Save' />
+        </p>
       </form>
-      <p><div id="close_button" style="width: 30px; height: 30px; background-color: yellow">close</div></p>
     </div>
 
     <script>
@@ -78,7 +123,7 @@
 
         document.getElementById('url').setAttribute('value', origin);
 
-        $("#close_button").bind("click", function() {
+        $("input[type='reset']").bind("click", function() {
           $.postMessage(
             'close',
             origin,
@@ -86,7 +131,7 @@
           );
         });
 
-        $('#send_button').bind('click', function() {
+        $("input[type='submit']").bind('click', function() {
           $.ajax({
             type: "POST",
             dataType: "json",
