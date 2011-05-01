@@ -21,14 +21,21 @@
 
     <% if current_account %>
     <div id="toolbar">
-      <div id="session">
-        <%= current_account.username %> |
-        <%= link_to 'logout', destroy_session_path(current_account) %>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <%= link_to 'Dashboard', urls_path %>
-        <%= link_to 'Tools', tools_index_path %>
-        <%= link_to 'Post on Shortcut.io', bookmarklet, :title => "Bookmarklet" %>
-      </div>
+      <ul>
+        <li>
+          <%= current_account.username %> |
+          <%= link_to 'logout', destroy_session_path(current_account) %>
+        </li>
+        <li>
+          <%= link_to 'Dashboard', urls_path %>
+        </li>
+        <li>
+          <%= link_to 'Tools', tools_index_path %>
+        </li>
+        <li>
+          <%= link_to 'Post on Shortcut.io', bookmarklet, :title => "Bookmarklet" %>
+        </li>
+      </ul>
       <div id="search">
         <input type="text" id="live_search" autofocus />
       </div>

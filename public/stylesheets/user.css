@@ -124,16 +124,18 @@ div#toolbar div#search {
   height: 50px;
 }
 
-div#toolbar div#session {
+div#toolbar ul {
   position: absolute;
   left: 20px;
   top: 15px;
+  margin-top: 0px;
+  margin-left: 0px;
 }
 
-div#toolbar div#bookmarklet {
-  position: absolute;
-  left: 200px;
-  top: 15px;
+div#toolbar ul li {
+  display: inline;
+  margin-left: 0px;
+  margin-right: 20px;
 }
 
 /* Search Results */
