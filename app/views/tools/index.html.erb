@@ -1,0 +1,23 @@
+<div id="tools">
+  <h3>Import</h3>
+
+  <p>
+    Upload a bookmark file. It will be imported in the background
+    and you will be notified when it is accessible.
+  </p>
+
+  <div id="file_upload">
+  <%= form_tag "/tools/convert", :multipart => true do %>
+    <input name="upload" type="file" />
+    <input type="submit" />
+  <% end %>
+  </div>
+
+  <h3>Export</h3>
+
+  <%= link_to 'right click - save as', tools_export_path %>
+
+  <h3>Reset</h3>
+
+  <%= link_to 'reset', tools_reset_path, :confirm => "Are you sure?", :method => "delete" %>
+</div>

@@ -1,0 +1,14 @@
+<!DOCTYPE NETSCAPE-Bookmark-file-1>
+  <HTML>
+	  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+	  <Title>Bookmarks</Title>
+	  <H1>Bookmarks</H1>
+
+    <DL><p>
+    <% Account.find(4).urls.find_each do |url| %>
+      <DT><A HREF="<%= url.uri %>" TAGS="<%= url.tag_list %>" ADD_DATE="<%= url.created_at.to_i %>"><%= url.title %></A>
+      <DD><%= url.description %>
+    <% end %>
+    </DL><p>
+
+  </HTML>

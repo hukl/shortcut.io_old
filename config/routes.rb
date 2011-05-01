@@ -1,7 +1,10 @@
 Frontend::Application.routes.draw do
-  get   "tools/import"
-  get   "tools/thumbnails"
-  post  "tools/convert"
+  get     "tools/index"
+  get     "tools/import"
+  get     "tools/export"
+  delete  "tools/reset"
+  get     "tools/thumbnails"
+  post    "tools/convert"
 
   devise_for :accounts
 

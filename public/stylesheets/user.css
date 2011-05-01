@@ -40,7 +40,7 @@ input:focus, textarea:focus {
 }
 
 div#wrapper {
-
+  margin-top: 80px;
 }
 
 div#sign_in_box {
@@ -186,7 +186,6 @@ div#search_results table td.search_category_result {
 /* MATRIX */
 
 div#matrix {
-  margin-top: 100px;
   padding: 30px;
 }
 
@@ -339,4 +338,11 @@ a#more {
   clear: both;
   height: 20px;
   padding: 20px;
+}
+
+div#tools {
+  margin: 0 auto;
+  margin-top: 80px;
+  width: 800px;
+  text-align: left;
 }

@@ -4,7 +4,7 @@
     <title>shortcut.io | <%= title_for_page %></title>
     <%= stylesheet_link_tag :all %>
     <%= csrf_meta_tag %>
-    <%= include_javascripts :workspace %>
+    <%= include_javascripts :tools %>
   </head>
   <body>
     <div>
@@ -19,7 +19,6 @@
       <% end %>
     </header>
 
-    <% if current_account %>
     <div id="toolbar">
       <div id="session">
         <%= current_account.username %> |
@@ -29,21 +28,11 @@
         <%= link_to 'Tools', tools_index_path %>
         <%= link_to 'Post on Shortcut.io', bookmarklet, :title => "Bookmarklet" %>
       </div>
-      <div id="search">
-        <input type="text" id="live_search" autofocus />
-      </div>
     </div>
-    <% end %>
 
     <div id="wrapper">
       <%= yield %>
     </div>
-
-    <script id="search_result_items" type="text/x-handlebars-template">
-      <tr class="selectable">
-        <td class="search_category">{{title}}</td>
-        <td class="search_category_result">{{result}}</td>
-      </tr>
-    </script>
   </body>
 </html>
+

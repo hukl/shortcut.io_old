@@ -10,3 +10,6 @@ javascripts:
     - public/javascripts/backbone/models/*
     - public/javascripts/backbone/views/*
     - public/javascripts/application.js
+  tools:
+    - public/javascripts/jquery.min.js
+    - public/javascripts/rails.js
