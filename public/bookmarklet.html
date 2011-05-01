@@ -138,7 +138,23 @@
             url: "/urls?auth_token=" + params.auth_token,
             data: $('form').serialize(),
             success: function(msg){
-              alert(msg.status+"\n"+msg.message);
+              $('body').html('<h3>Success</h3>').css({
+                textAlign : "center",
+                position  : "absolute",
+                top       : "150px",
+                left      : "0px",
+                width     : "380px"
+              })
+              setTimeout(
+                function() {
+                  $.postMessage(
+                    'close',
+                    origin,
+                    parent
+                  );
+                },
+                1000
+              )
             }
           });
 
