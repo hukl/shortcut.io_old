@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110306190155) do
+ActiveRecord::Schema.define(:version => 20110502203344) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20110306190155) do
   end
 
   create_table "urls", :force => true do |t|
-    t.string   "uri"
+    t.text     "uri"
     t.string   "title"
     t.text     "description"
     t.datetime "created_at"
