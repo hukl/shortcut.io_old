@@ -10,10 +10,6 @@ class BookmarkImport
     bookmarks.gsub!(/\<\/A\>$/, "</A></DT>")
     bookmarks.gsub!(/\<\/DL\>\<p\>/, "</DL></p>")
 
-    File.open("/tmp/boogie.html", "w+") do |file|
-      file.write bookmarks
-    end
-
     doc = Nokogiri::XML::Document.parse( bookmarks )
 
     Url.record_timestamps = false
