@@ -1,3 +1,5 @@
+require 'uri'
+
 namespace :search do
 
   desc "import all bookmarks in es"
@@ -9,13 +11,14 @@ namespace :search do
 
       Url.all.each_with_index do |url, index|
         store(
-          :id           => url.id,
-          :title        => url.title,
-          :description  => url.description,
-          :uri          => url.uri,
-          :tags         => url.tag_list,
-          :image_uuid   => url.image_uuid,
-          :account_id   => url.account.id
+          :id               => url.id,
+          :title            => url.title,
+          :description      => url.description,
+          :uri              => url.uri,
+          :uri_components   => ( URI.parse(url.uri).host.split(".") rescue [] ),
+          :tags             => url.tag_list,
+          :image_uuid       => url.image_uuid,
+          :account_id       => url.account.id
         )
         puts index
       end
