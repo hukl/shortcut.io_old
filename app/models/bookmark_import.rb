@@ -1,27 +1,27 @@
+require 'iconv'
+
 class BookmarkImport
 
   @queue = :bookmark_import
 
+  @@converter = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+
   def self.perform bookmarks, account_id
-    bookmarks.gsub!(/\<DD\>(.*)$/) do |match|
-      "<DD>" + $1 + "</DD>"
-    end
 
-    bookmarks.gsub!(/\<\/A\>$/, "</A></DT>")
-    bookmarks.gsub!(/\<\/DL\>\<p\>/, "</DL></p>")
+    bookmarks = @@converter.iconv( bookmarks )
 
-    doc = Nokogiri::XML::Document.parse( bookmarks )
+    doc = Nokogiri::HTML::Document.parse( bookmarks )
 
     Url.record_timestamps = false
 
-    doc.css("DT A").each do |node|
+    doc.css("a").each do |node|
       url =  Url.new(
         :title      => node.text,
-        :uri        => node['HREF'],
-        :created_at => Time.at(node['ADD_DATE'].to_i),
+        :uri        => node.attributes['href'].text,
+        :created_at => Time.at(node.attributes['add_date'].text.to_i),
         :account_id => account_id
       )
-      url.tag_list = node['TAGS']
+      url.tag_list = node.attributes['tags'].text
 
       url.save
     end
