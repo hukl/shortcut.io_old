@@ -5,7 +5,7 @@
 	  <H1>Bookmarks</H1>
 
     <DL><p>
-    <% Account.find(4).urls.find_each do |url| %>
+    <% current_account.urls.find_each do |url| %>
       <DT><A HREF="<%= url.uri %>" TAGS="<%= url.tag_list %>" ADD_DATE="<%= url.created_at.to_i %>"><%= url.title %></A>
       <DD><%= url.description %>
     <% end %>
