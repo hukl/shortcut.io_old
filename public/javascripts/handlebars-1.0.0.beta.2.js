@@ -107,6 +107,8 @@ parse: function parse(input) {
     this.lexer.setInput(input);
     this.lexer.yy = this.yy;
     this.yy.lexer = this.lexer;
+    if (typeof this.lexer.yylloc == 'undefined')
+        this.lexer.yylloc = {};
     var yyloc = this.lexer.yylloc;
     lstack.push(yyloc);
 
@@ -191,7 +193,7 @@ parse: function parse(input) {
                 popStack(1);
                 state = stack[stack.length-1];
             }
-            
+
             preErrorSymbol = symbol; // save the lookahead token
             symbol = TERROR;         // insert generic error symbol as new lookahead
             state = stack[stack.length-1];
@@ -239,7 +241,7 @@ parse: function parse(input) {
                     first_line: lstack[lstack.length-(len||1)].first_line,
                     last_line: lstack[lstack.length-1].last_line,
                     first_column: lstack[lstack.length-(len||1)].first_column,
-                    last_column: lstack[lstack.length-1].last_column,
+                    last_column: lstack[lstack.length-1].last_column
                 };
                 r = this.performAction.call(yyval, yytext, yyleng, yylineno, this.yy, action[1], vstack, lstack);
 
@@ -345,7 +347,7 @@ next:function () {
                 this.yylloc = {first_line: this.yylloc.last_line,
                                last_line: this.yylineno+1,
                                first_column: this.yylloc.last_column,
-                               last_column: lines ? lines[lines.length-1].length-1 : this.yylloc.last_column + match.length}
+                               last_column: lines ? lines[lines.length-1].length-1 : this.yylloc.last_column + match[0].length}
                 this.yytext += match[0];
                 this.match += match[0];
                 this.matches = match;
@@ -432,7 +434,7 @@ case 21: return 5;
 break;
 }
 };
-lexer.rules = [/^[^\x00]*?(?=(\{\{))/,/^[^\x00]+/,/^\{\{>/,/^\{\{#/,/^\{\{\//,/^\{\{\^/,/^\{\{\s*else\b/,/^\{\{\{/,/^\{\{&/,/^\{\{!.*?\}\}/,/^\{\{/,/^=/,/^\.(?=[} ])/,/^\.\./,/^[/.]/,/^\s+/,/^\}\}\}/,/^\}\}/,/^"(\\["]|[^"])*"/,/^[a-zA-Z0-9_]+(?=[=} /.])/,/^./,/^$/];
+lexer.rules = [/^[^\x00]*?(?=(\{\{))/,/^[^\x00]+/,/^\{\{>/,/^\{\{#/,/^\{\{\//,/^\{\{\^/,/^\{\{\s*else\b/,/^\{\{\{/,/^\{\{&/,/^\{\{![\s\S]*?\}\}/,/^\{\{/,/^=/,/^\.(?=[} ])/,/^\.\./,/^[/.]/,/^\s+/,/^\}\}\}/,/^\}\}/,/^"(\\["]|[^"])*"/,/^[a-zA-Z0-9_-]+(?=[=} /.])/,/^./,/^$/];
 lexer.conditions = {"mu":{"rules":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],"inclusive":false},"INITIAL":{"rules":[0,1,21],"inclusive":true}};return lexer;})()
 parser.lexer = lexer;
 return parser;
@@ -455,8 +457,11 @@ if (typeof module !== 'undefined' && require.main === module) {
   exports.main(typeof process !== 'undefined' ? process.argv.slice(1) : require("system").args);
 }
 };
+;
 // lib/handlebars/base.js
 var Handlebars = {};
+
+Handlebars.VERSION = "1.0.beta.1";
 
 Handlebars.Parser = handlebars;
 
@@ -467,22 +472,6 @@ Handlebars.parse = function(string) {
 
 Handlebars.print = function(ast) {
   return new Handlebars.PrintVisitor().accept(ast);
-};
-
-Handlebars.Runtime = {};
-
-Handlebars.Runtime.compile = function(string) {
-  var ast = Handlebars.parse(string);
-
-  return function(context, helpers, partials) {
-    helpers  = helpers || Handlebars.helpers;
-    partials = partials || Handlebars.partials;
-
-    var internalContext = new Handlebars.Context(context, helpers, partials);
-    var runtime = new Handlebars.Runtime(internalContext);
-    runtime.accept(ast);
-    return runtime.buffer;
-  };
 };
 
 Handlebars.helpers  = {};
@@ -496,6 +485,14 @@ Handlebars.registerHelper = function(name, fn, inverse) {
 Handlebars.registerPartial = function(name, str) {
   this.partials[name] = str;
 };
+
+Handlebars.registerHelper('helperMissing', function(arg) {
+  if(arguments.length === 2) {
+    return undefined;
+  } else {
+    throw new Error("Could not find property '" + arg + "'");
+  }
+});
 
 Handlebars.registerHelper('blockHelperMissing', function(context, fn, inverse) {
   inverse = inverse || function() {};
@@ -625,7 +622,7 @@ Handlebars.log = function(level, str) { Handlebars.logger.log(level, str); };
 
   Handlebars.AST.IdNode = function(parts) {
     this.type = "ID";
-    this.original = parts.join("/");
+    this.original = parts.join(".");
 
     var dig = [], depth = 0;
 
@@ -638,6 +635,7 @@ Handlebars.log = function(level, str) { Handlebars.logger.log(level, str); };
     }
 
     this.parts    = dig;
+    this.string   = dig.join('.');
     this.depth    = depth;
     this.isSimple = (dig.length === 1) && (depth === 0);
   };
@@ -682,7 +680,7 @@ Handlebars.SafeString.prototype.toString = function() {
   };
 
   var badChars = /&(?!\w+;)|[<>]/g;
-  var possible = /[&<>]/
+  var possible = /[&<>]/;
 
   var escapeChar = function(chr) {
     return escape[chr] || "&amp;"
@@ -716,7 +714,7 @@ Handlebars.SafeString.prototype.toString = function() {
     }
   };
 })();;
-// lib/handlebars/vm.js
+// lib/handlebars/compiler.js
 Handlebars.Compiler = function() {};
 Handlebars.JavaScriptCompiler = function() {};
 
@@ -736,7 +734,8 @@ Handlebars.JavaScriptCompiler = function() {};
     invokePartial: 12,
     push: 13,
     invokeInverse: 14,
-    assignToHash: 15
+    assignToHash: 15,
+    pushStringParam: 16
   };
 
   Compiler.MULTI_PARAM_OPCODES = {
@@ -752,7 +751,8 @@ Handlebars.JavaScriptCompiler = function() {};
     invokePartial: 1,
     push: 1,
     invokeInverse: 1,
-    assignToHash: 1
+    assignToHash: 1,
+    pushStringParam: 1
   };
 
   Compiler.DISASSEMBLE_MAP = {};
@@ -767,6 +767,8 @@ Handlebars.JavaScriptCompiler = function() {};
   };
 
   Compiler.prototype = {
+    compiler: Compiler,
+
     disassemble: function() {
       var opcodes = this.opcodes, opcode, nextCode;
       var out = [], str, name, value;
@@ -805,9 +807,10 @@ Handlebars.JavaScriptCompiler = function() {};
 
     guid: 0,
 
-    compile: function(program) {
+    compile: function(program, options) {
       this.children = [];
       this.depths = {list: []};
+      this.options = options || {};
       return this.program(program);
     },
 
@@ -832,7 +835,7 @@ Handlebars.JavaScriptCompiler = function() {};
     },
 
     compileProgram: function(program) {
-      var result = new Compiler().compile(program);
+      var result = new this.compiler().compile(program, this.options);
       var guid = this.guid++;
 
       this.usePartial = this.usePartial || result.usePartial;
@@ -943,7 +946,17 @@ Handlebars.JavaScriptCompiler = function() {};
 
       while(i--) {
         param = params[i];
-        this[param.type](param);
+
+        if(this.options.stringParams) {
+          if(param.depth) {
+            this.addDepth(param.depth);
+          }
+
+          this.opcode('getContext', param.depth || 0);
+          this.opcode('pushStringParam', param.string);
+        } else {
+          this[param.type](param);
+        }
       }
     },
 
@@ -989,7 +1002,7 @@ Handlebars.JavaScriptCompiler = function() {};
     // PUBLIC API: You can override these methods in a subclass to provide
     // alternative compiled forms for name lookup and buffering semantics
     nameLookup: function(parent, name, type) {
-      if(JavaScriptCompiler.RESERVED_WORDS[name]) {
+      if(JavaScriptCompiler.RESERVED_WORDS[name] || name.indexOf('-') !== -1) {
         return parent + "['" + name + "']";
       } else {
         return parent + "." + name;
@@ -1005,9 +1018,9 @@ Handlebars.JavaScriptCompiler = function() {};
     },
     // END PUBLIC API
 
-    compile: function(environment, data) {
+    compile: function(environment, options) {
       this.environment = environment;
-      this.data = data;
+      this.options = options || {};
 
       this.preamble();
 
@@ -1015,7 +1028,7 @@ Handlebars.JavaScriptCompiler = function() {};
       this.stackVars = [];
       this.registers = {list: []};
 
-      this.compileChildren(environment, data);
+      this.compileChildren(environment, options);
 
       Handlebars.log(Handlebars.logger.DEBUG, environment.disassemble() + "\n\n");
 
@@ -1109,12 +1122,11 @@ Handlebars.JavaScriptCompiler = function() {};
 
       var params = ["Handlebars", "context", "helpers", "partials"];
 
-      if(this.data) { params.push("data"); }
+      if(this.options.data) { params.push("data"); }
 
       for(var i=0, l=this.environment.depths.list.length; i<l; i++) {
         params.push("depth" + this.environment.depths.list[i]);
       }
-
 
       if(params.length === 4 && !this.environment.usePartial) { params.pop(); }
 
@@ -1129,10 +1141,12 @@ Handlebars.JavaScriptCompiler = function() {};
 
       container.children = this.environment.children;
 
-      return function(context, helpers, partials, data, $depth) {
+      return function(context, options, $depth) {
         try {
-          var args = Array.prototype.slice.call(arguments);
-          args.unshift(Handlebars);
+          options = options || {};
+          var args = [Handlebars, context, options.helpers, options.partials, options.data];
+          var depth = Array.prototype.slice.call(arguments, 2);
+          args = args.concat(depth);
           return container.render.apply(container, args);
         } catch(e) {
           throw e;
@@ -1193,6 +1207,11 @@ Handlebars.JavaScriptCompiler = function() {};
       this.source.push(topStack + " = " + this.nameLookup(topStack, name, 'context') + ";");
     },
 
+    pushStringParam: function(string) {
+      this.pushStack("currentContext");
+      this.pushString(string);
+    },
+
     pushString: function(string) {
       this.pushStack(this.quotedString(string));
     },
@@ -1219,24 +1238,32 @@ Handlebars.JavaScriptCompiler = function() {};
 
     populateParams: function(paramSize, helperId, program, inverse, fn) {
       var id = this.popStack(), nextStack;
-      var params = [];
+      var params = [], param, stringParam;
 
       var hash = this.popStack();
 
-      for(var i=0; i<paramSize; i++) {
-        var param = this.popStack();
-        params.push(param);
-      }
-
       this.register('tmp1', program);
       this.source.push('tmp1.hash = ' + hash + ';');
+
+      if(this.options.stringParams) {
+        this.source.push('tmp1.contexts = [];');
+      }
+
+      for(var i=0; i<paramSize; i++) {
+        param = this.popStack();
+        params.push(param);
+
+        if(this.options.stringParams) {
+          this.source.push('tmp1.contexts.push(' + this.popStack() + ');');
+        }
+      }
 
       if(inverse) {
         this.source.push('tmp1.fn = tmp1;');
         this.source.push('tmp1.inverse = ' + inverse + ';');
       }
 
-      if(this.data) {
+      if(this.options.data) {
         this.source.push('tmp1.data = data;');
       }
 
@@ -1282,7 +1309,7 @@ Handlebars.JavaScriptCompiler = function() {};
 
     compiler: JavaScriptCompiler,
 
-    compileChildren: function(environment, data) {
+    compileChildren: function(environment, options) {
       var children = environment.children, child, compiler;
       var compiled = [];
 
@@ -1290,7 +1317,7 @@ Handlebars.JavaScriptCompiler = function() {};
         child = children[i];
         compiler = new this.compiler();
 
-        compiled[i] = compiler.compile(child, data);
+        compiled[i] = compiler.compile(child, options);
       }
 
       environment.rawChildren = children;
@@ -1304,7 +1331,7 @@ Handlebars.JavaScriptCompiler = function() {};
 
       var depths = this.environment.rawChildren[guid].depths.list;
 
-      if(this.data) { programParams.push("data"); }
+      if(this.options.data) { programParams.push("data"); }
 
       for(var i=0, l = depths.length; i<l; i++) {
         depth = depths[i];
@@ -1362,7 +1389,7 @@ Handlebars.JavaScriptCompiler = function() {};
 
     quotedString: function(str) {
       return '"' + str
-        .replace(/\\/, '\\\\')
+        .replace(/\\/g, '\\\\')
         .replace(/"/g, '\\"')
         .replace(/\n/g, '\\n')
         .replace(/\r/g, '\\r') + '"';
@@ -1382,34 +1409,46 @@ Handlebars.JavaScriptCompiler = function() {};
 })(Handlebars.Compiler, Handlebars.JavaScriptCompiler);
 
 Handlebars.VM = {
-  programWithDepth: function(fn) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    return function(context, helpers, partials, data) {
-      args[0] = helpers || args[0];
-      args[1] = partials || args[1];
-      args[2] = data || args[2];
-      return fn.apply(this, [context].concat(args));
+  programWithDepth: function(fn, helpers, partials, data, $depth) {
+    var args = Array.prototype.slice.call(arguments, 4);
+
+    return function(context, options) {
+      options = options || {};
+
+      options = {
+        helpers: options.helpers || helpers,
+        partials: options.partials || partials,
+        data: options.data || data
+      };
+
+      return fn.apply(this, [context, options].concat(args));
     };
   },
   program: function(fn, helpers, partials, data) {
-    return function(context, h2, p2, d2) {
-      return fn(context, h2 || helpers, p2 || partials, d2 || data);
+    return function(context, options) {
+      options = options || {};
+
+      return fn(context, {
+        helpers: options.helpers || helpers,
+        partials: options.partials || partials,
+        data: options.data || data
+      });
     };
   },
   noop: function() { return ""; },
-  compile: function(string, data) {
+  compile: function(string, options) {
     var ast = Handlebars.parse(string);
-    var environment = new Handlebars.Compiler().compile(ast);
-    return new Handlebars.JavaScriptCompiler().compile(environment, data);
+    var environment = new Handlebars.Compiler().compile(ast, options);
+    return new Handlebars.JavaScriptCompiler().compile(environment, options);
   },
   invokePartial: function(partial, name, context, helpers, partials) {
     if(partial === undefined) {
       throw new Handlebars.Exception("The partial " + name + " could not be found");
     } else if(partial instanceof Function) {
-      return partial(context, helpers, partials);
+      return partial(context, {helpers: helpers, partials: partials});
     } else {
       partials[name] = Handlebars.VM.compile(partial);
-      return partials[name](context, helpers, partials);
+      return partials[name](context, {helpers: helpers, partials: partials});
     }
   }
 };
