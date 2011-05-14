@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.6'
-gem 'jquery-rails'
+gem 'rails', '3.0.7'
+gem 'jquery-rails', '1.0.2'
 gem 'pg'
 gem 'acts-as-taggable-on'
 gem 'devise'
@@ -10,7 +10,7 @@ gem 'unicorn'
 gem 'nokogiri'
 gem 'resque'
 gem 'uuid'
-gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git'
+gem 'will_paginate', '3.0.pre2'
 gem 'jammit'
 gem 'slingshot-rb'
 

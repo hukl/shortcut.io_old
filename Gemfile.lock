@@ -1,9 +1,3 @@
-GIT
-  remote: git://github.com/mislav/will_paginate.git
-  revision: f169dcc1fbb8ab2600103dd5cde9b7c3b45bf763
-  specs:
-    will_paginate (2.3.15)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -12,12 +6,12 @@ GEM
       open4
     Platform (0.4.0)
     abstract (1.0.0)
-    actionmailer (3.0.6)
-      actionpack (= 3.0.6)
+    actionmailer (3.0.7)
+      actionpack (= 3.0.7)
       mail (~> 2.2.15)
-    actionpack (3.0.6)
-      activemodel (= 3.0.6)
-      activesupport (= 3.0.6)
+    actionpack (3.0.7)
+      activemodel (= 3.0.7)
+      activesupport (= 3.0.7)
       builder (~> 2.1.2)
       erubis (~> 2.6.6)
       i18n (~> 0.5.0)
@@ -25,19 +19,19 @@ GEM
       rack-mount (~> 0.6.14)
       rack-test (~> 0.5.7)
       tzinfo (~> 0.3.23)
-    activemodel (3.0.6)
-      activesupport (= 3.0.6)
+    activemodel (3.0.7)
+      activesupport (= 3.0.7)
       builder (~> 2.1.2)
       i18n (~> 0.5.0)
-    activerecord (3.0.6)
-      activemodel (= 3.0.6)
-      activesupport (= 3.0.6)
+    activerecord (3.0.7)
+      activemodel (= 3.0.7)
+      activesupport (= 3.0.7)
       arel (~> 2.0.2)
       tzinfo (~> 0.3.23)
-    activeresource (3.0.6)
-      activemodel (= 3.0.6)
-      activesupport (= 3.0.6)
-    activesupport (3.0.6)
+    activeresource (3.0.7)
+      activemodel (= 3.0.7)
+      activesupport (= 3.0.7)
+    activesupport (3.0.7)
     acts-as-taggable-on (2.0.6)
     archive-tar-minitar (0.5.2)
     arel (2.0.9)
@@ -55,15 +49,15 @@ GEM
     jammit (0.6.0)
       closure-compiler (>= 0.1.0)
       yui-compressor (>= 0.9.1)
-    jquery-rails (0.2.7)
-      rails (~> 3.0)
-      thor (~> 0.14.4)
+    jquery-rails (1.0.2)
+      railties (~> 3.0)
+      thor (~> 0.14)
     json (1.4.6)
     kgio (2.3.3)
     linecache19 (0.5.11)
       ruby_core_source (>= 0.1.4)
     macaddr (1.0.0)
-    mail (2.2.15)
+    mail (2.2.19)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -79,17 +73,17 @@ GEM
       rack (>= 1.0.0)
     rack-test (0.5.7)
       rack (>= 1.0)
-    rails (3.0.6)
-      actionmailer (= 3.0.6)
-      actionpack (= 3.0.6)
-      activerecord (= 3.0.6)
-      activeresource (= 3.0.6)
-      activesupport (= 3.0.6)
+    rails (3.0.7)
+      actionmailer (= 3.0.7)
+      actionpack (= 3.0.7)
+      activerecord (= 3.0.7)
+      activeresource (= 3.0.7)
+      activesupport (= 3.0.7)
       bundler (~> 1.0)
-      railties (= 3.0.6)
-    railties (3.0.6)
-      actionpack (= 3.0.6)
-      activesupport (= 3.0.6)
+      railties (= 3.0.7)
+    railties (3.0.7)
+      actionpack (= 3.0.7)
+      activesupport (= 3.0.7)
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
@@ -124,7 +118,7 @@ GEM
     tilt (1.3)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.26)
+    tzinfo (0.3.27)
     unicorn (3.5.0)
       kgio (~> 2.3)
       rack
@@ -134,6 +128,7 @@ GEM
       rack (>= 1.0.0)
     warden (1.0.3)
       rack (>= 1.0.0)
+    will_paginate (3.0.pre2)
     yajl-ruby (0.8.2)
     yui-compressor (0.9.6)
       POpen4 (>= 0.1.4)
@@ -145,13 +140,13 @@ DEPENDENCIES
   acts-as-taggable-on
   devise
   jammit
-  jquery-rails
+  jquery-rails (= 1.0.2)
   nokogiri
   pg
-  rails (= 3.0.6)
+  rails (= 3.0.7)
   resque
   ruby-debug19
   slingshot-rb
   unicorn
   uuid
-  will_paginate!
+  will_paginate (= 3.0.pre2)

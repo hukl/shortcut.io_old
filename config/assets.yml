@@ -1,7 +1,7 @@
 javascripts:
   workspace:
     - public/javascripts/jquery.min.js
-    - public/javascripts/rails.js
+    - public/javascripts/jquery_ujs.js
     - public/javascripts/json2.js
     - public/javascripts/underscore-min.js
     - public/javascripts/handlebars-1.0.0.beta.2.js
