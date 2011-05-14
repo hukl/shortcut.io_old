@@ -12,4 +12,4 @@ javascripts:
     - public/javascripts/application.js
   tools:
     - public/javascripts/jquery.min.js
-    - public/javascripts/rails.js
+    - public/javascripts/jquery_ujs.js
