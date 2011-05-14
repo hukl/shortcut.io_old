@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'iconv'
 
 class BookmarkImport
@@ -15,13 +16,22 @@ class BookmarkImport
     Url.record_timestamps = false
 
     doc.css("a").each do |node|
-      url =  Url.new(
+
+      if node.attributes['add_date']
+        add_date = Time.at( node.attributes['add_date'].text.to_i )
+      else
+        add_date = Time.now
+      end
+
+      options = {
         :title      => node.text,
         :uri        => node.attributes['href'].text,
-        :created_at => Time.at(node.attributes['add_date'].text.to_i),
-        :account_id => account_id
-      )
-      url.tag_list = node.attributes['tags'].text
+        :created_at => add_date,
+        :account_id => current_account
+      }
+
+      url =  Url.new( options )
+      url.tag_list = node.attributes['tags'].text if node.attributes['tags']
 
       url.save
     end
