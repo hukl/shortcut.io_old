@@ -75,8 +75,13 @@
       <p>
         <label for="url[tags]">Referrer</label><br />
         <a href="{{{referrer}}}">{{short_referrer referrer}}</a>
-       </p>
+      </p>
       {{/if}}
+
+      <p>
+        <label for="url[tags]">Saved at</label><br />
+        {{nice_date created_at}}
+      </p>
 
 
       <p class="form_buttons">

@@ -18,3 +18,9 @@ Handlebars.registerHelper('short_referrer', function(referrer) {
     return result[1];
   }
 });
+
+Handlebars.registerHelper('nice_date', function(iso_date) {
+  var date = new Date(iso_date)
+  return ( date.toLocaleDateString() + " "  + date.toLocaleTimeString() )
+});
+
