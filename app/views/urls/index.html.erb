@@ -20,7 +20,7 @@
       <a href="#" class="delete_url"></a>
     </div>
     <div class="details">
-      <h3>{{truncate title}}</h3>
+      <h3>{{truncate title "28"}}</h3>
       <p><input type="text" value="{{uri}}" /></p>
     </div>
 </script>
@@ -63,23 +63,23 @@
       <h3>{{title}}</h3>
       <p>{{description}}</p>
       <p>
-        <label for="url[uri]">URL</label><br />
-        {{uri}}
+        <label>URL</label><br />
+        {{{truncate uri "50"}}}
       </p>
       <p>
-        <label for="url[tags]">Tags</label><br />
+        <label>Tags</label><br />
         {{tags}}
       </p>
 
       {{#if referrer}}
       <p>
-        <label for="url[tags]">Referrer</label><br />
+        <label>Referrer</label><br />
         <a href="{{{referrer}}}">{{short_referrer referrer}}</a>
       </p>
       {{/if}}
 
       <p>
-        <label for="url[tags]">Saved at</label><br />
+        <label>Saved at</label><br />
         {{nice_date created_at}}
       </p>
 

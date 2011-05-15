@@ -1,5 +1,6 @@
-Handlebars.registerHelper('truncate', function(title) {
-  return title.substring(0, 30);
+Handlebars.registerHelper('truncate', function(title, length) {
+  console.log(length)
+  return title.substring(0, length) + "…";
 });
 
 Handlebars.registerHelper('thumbnail_url', function(image_uuid, size) {

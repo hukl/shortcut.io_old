@@ -305,6 +305,7 @@ div.widget {
   font-size: 12px;
 }
 
+
 div#edit_url_view p {
   margin-top: 0px;
   margin-bottom: 10px;
@@ -323,7 +324,16 @@ div.widget form, div.widget div#widget_content {
   top: 50px;
 }
 
-div#edit_url_view form textarea, div#edit_url_view form input[type=text] {
+div#show_url_view div#widget_content {
+  width: 350px;
+}
+
+div#show_url_view label {
+  font-weight: bold;
+}
+
+div#edit_url_view form textarea,
+div#edit_url_view form input[type=text] {
   color: #747C82;
   width: 350px;
   border: 1px solid #d1d1d1;
