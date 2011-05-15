@@ -27,7 +27,7 @@ class BookmarkImport
         :title      => node.text,
         :uri        => node.attributes['href'].text,
         :created_at => add_date,
-        :account_id => current_account
+        :account_id => account_id
       }
 
       url =  Url.new( options )
