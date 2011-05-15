@@ -70,10 +70,13 @@
         <label for="url[tags]">Tags</label><br />
         {{tags}}
       </p>
+
+      {{#if referrer}}
       <p>
         <label for="url[tags]">Referrer</label><br />
-        {{short_referrer referrer}}
-      </p>
+        <a href="{{{referrer}}}">{{short_referrer referrer}}</a>
+       </p>
+      {{/if}}
 
 
       <p class="form_buttons">
