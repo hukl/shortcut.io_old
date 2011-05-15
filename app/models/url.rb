@@ -28,7 +28,8 @@ class Url < ActiveRecord::Base
       :uri          => uri,
       :image_uuid   => image_uuid,
       :tags         => tag_list.join(", "),
-      :referrer     => referrer
+      :referrer     => referrer,
+      :created_at   => created_at.utc.iso8601
     }
   end
 
@@ -56,7 +57,6 @@ class Url < ActiveRecord::Base
 
     url = self
 
-    #Slingshot::Client::RestClient.delete("http://localhost:9200/urls/document/#{self.id}")
     Slingshot.index('urls') do
       store(
         :id               => url.id,
@@ -67,7 +67,8 @@ class Url < ActiveRecord::Base
         :tags             => url.tag_list,
         :image_uuid       => url.image_uuid,
         :account_id       => url.account.id,
-        :referrer         => url.referrer
+        :referrer         => url.referrer,
+        :created_at       => url.created_at.utc.iso8601
       )
 
       refresh
