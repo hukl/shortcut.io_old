@@ -9,6 +9,7 @@ class Url < ActiveRecord::Base
   after_destroy :delete_from_index
 
   validates_presence_of   :account_id
+  validates_presence_of   :uri
   validates_uniqueness_of :uri,         :scope => :account_id
 
   ActiveRecord::Base.include_root_in_json = false
@@ -26,7 +27,8 @@ class Url < ActiveRecord::Base
       :description  => description,
       :uri          => uri,
       :image_uuid   => image_uuid,
-      :tags         => tag_list.join(", ")
+      :tags         => tag_list.join(", "),
+      :referrer     => referrer
     }
   end
 
@@ -64,7 +66,8 @@ class Url < ActiveRecord::Base
         :uri_components   => ( URI.parse(url.uri).host.split(".") rescue [] ),
         :tags             => url.tag_list,
         :image_uuid       => url.image_uuid,
-        :account_id       => url.account.id
+        :account_id       => url.account.id,
+        :referrer         => url.referrer
       )
 
       refresh
