@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110502203344) do
+ActiveRecord::Schema.define(:version => 20110514092430) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20110502203344) do
     t.datetime "updated_at"
     t.integer  "account_id"
     t.boolean  "delta",       :default => true, :null => false
-    t.string   "referrer"
+    t.text     "referrer"
     t.string   "image_uuid"
   end
 
