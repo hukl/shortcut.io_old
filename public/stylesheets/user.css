@@ -324,6 +324,10 @@ div.widget form, div.widget div#widget_content {
   top: 50px;
 }
 
+div.widget div#widget_content h3 {
+  margin-top: 0px;
+}
+
 div#show_url_view div#widget_content {
   width: 350px;
 }

@@ -61,10 +61,12 @@
 
     <div id="widget_content">
       <h3>{{title}}</h3>
-      <p>{{description}}</p>
+      <p class="url_description">
+        {{description}}
+      </p>
       <p>
         <label>URL</label><br />
-        {{{truncate uri "50"}}}
+        <a href="{{uri}}">{{{truncate uri "50"}}}</a>
       </p>
       <p>
         <label>Tags</label><br />
