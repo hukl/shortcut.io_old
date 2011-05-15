@@ -11,6 +11,7 @@ $(document).ready(function() {
 
     initialize : function() {
       _.bindAll(this, 'add_all', 'add_one', 'render');
+      this.active_widget = null;
       UrlStore.bind('all', this.render);
       UrlStore.bind('add', this.add_one)
       UrlStore.bind('refresh', this.add_all);
@@ -59,6 +60,15 @@ $(document).ready(function() {
       }
 
       return false;
+    },
+
+    show_widget : function( widget ) {
+      if (this.active_widget !== null) {
+        this.active_widget.close()
+      }
+
+      this.active_widget = widget
+      this.active_widget.render()
     }
 
   })

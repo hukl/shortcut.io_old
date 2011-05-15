@@ -53,3 +53,32 @@
       <input type="hidden" name="id" value="{{id}}" />
     </form>
 </script>
+
+<script id="show_url_template" type="text/x-handlebars-template">
+    <div class="thumbnail_frame">
+      <img src="{{{thumbnail_url image_uuid "300"}}}" width="300px" height="300px"/>
+    </div>
+
+    <div id="widget_content">
+      <h3>{{title}}</h3>
+      <p>{{description}}</p>
+      <p>
+        <label for="url[uri]">URL</label><br />
+        {{uri}}
+      </p>
+      <p>
+        <label for="url[tags]">Tags</label><br />
+        {{tags}}
+      </p>
+      <p>
+        <label for="url[tags]">Referrer</label><br />
+        {{short_referrer referrer}}
+      </p>
+
+
+      <p class="form_buttons">
+        <input type="reset" value="Close" />
+      </p>
+
+    </div>
+</script>

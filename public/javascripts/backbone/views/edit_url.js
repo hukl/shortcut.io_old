@@ -1,6 +1,7 @@
 var EditUrlView = Backbone.View.extend({
   tagName   : 'div',
   id        : 'edit_url_view',
+  className : 'widget',
 
   events    : {
     "reset form"  : "close",

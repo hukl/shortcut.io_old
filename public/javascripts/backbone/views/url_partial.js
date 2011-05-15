@@ -3,8 +3,8 @@ var UrlPartial = Backbone.View.extend({
   className   : 'uri',
 
   events      : {
-    "mouseenter"         : "show_meta",
-    "mouseleave"          : "hide_meta",
+    "mouseenter"        : "show_meta",
+    "mouseleave"        : "hide_meta",
     "click .edit_url"   : "display_edit_widget",
     "click .show_url"   : "display_show_widget",
     "click .delete_url" : "delete_url"
@@ -29,12 +29,12 @@ var UrlPartial = Backbone.View.extend({
   },
 
   display_edit_widget : function() {
-    var view = new EditUrlView({model : this.model});
-    view.render();
+    App.show_widget( new EditUrlView({model : this.model}) )
     return false;
   },
 
   display_show_widget : function() {
+    App.show_widget( new ShowUrlView({model : this.model}) )
     return false;
   },
 

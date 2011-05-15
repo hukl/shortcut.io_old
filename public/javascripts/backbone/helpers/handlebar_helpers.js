@@ -12,3 +12,9 @@ Handlebars.registerHelper('thumbnail_url', function(image_uuid, size) {
 
   return segments.join("/");
 });
+
+Handlebars.registerHelper('short_referrer', function(referrer) {
+  if ( result = referrer.match(/^https?:\/\/(.+)\//) ) {
+    return result[1];
+  }
+});

@@ -294,7 +294,7 @@ div#matrix div.uri div.details input[type=text] {
 
 /* edit url */
 
-div#edit_url_view {
+div.widget {
   width: 800px;
   min-height: 400px;
   background-color: #ffffff;
@@ -310,14 +310,14 @@ div#edit_url_view p {
   margin-bottom: 10px;
 }
 
-div#edit_url_view .thumbnail_frame {
+div.widget .thumbnail_frame {
   border: 1px solid #d1d1d1;
   position: absolute;
   left: 40px;
   top: 50px;
 }
 
-div#edit_url_view form {
+div.widget form, div.widget div#widget_content {
   position: absolute;
   left: 390px;
   top: 50px;
