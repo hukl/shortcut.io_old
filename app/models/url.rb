@@ -14,6 +14,13 @@ class Url < ActiveRecord::Base
 
   ActiveRecord::Base.include_root_in_json = false
 
+  def self.reindex
+    all.each do |url|
+      url.delete_from_index
+      url.update_index
+    end
+  end
+
   def action= name
   end
 
@@ -57,20 +64,22 @@ class Url < ActiveRecord::Base
 
     url = self
 
-    Slingshot.index('urls') do
-      store(
-        :id               => url.id,
-        :title            => url.title,
-        :description      => url.description,
-        :uri              => url.uri,
-        :uri_components   => ( URI.parse(url.uri).host.split(".") rescue [] ),
-        :tags             => url.tag_list,
-        :image_uuid       => url.image_uuid,
-        :account_id       => url.account.id,
-        :referrer         => url.referrer,
-        :created_at       => url.created_at.utc.iso8601
-      )
+    options = {
+      :id                   => url.id,
+      :title                => url.title,
+      :description          => url.description,
+      :uri                  => url.uri,
+      :uri_components       => ( URI.parse(url.uri).host.split(".") rescue [] ),
+      :tags                 => url.tag_list,
+      :image_uuid           => url.image_uuid,
+      :account_id           => url.account.id,
+      :referrer             => url.referrer,
+      :referrer_components  => ( URI.parse(url.referrer).host.split(".") rescue [] ),
+      :created_at           => url.created_at.utc.iso8601
+    }
 
+    Slingshot.index('urls') do
+      store( options )
       refresh
     end
   end
