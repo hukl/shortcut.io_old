@@ -7,17 +7,10 @@
     <%= include_javascripts :tools %>
   </head>
   <body>
-    <div>
+    <div id="notifications">
       <%= flash[:notice] %>
       <%= flash[:alert] %>
     </div>
-
-    <header>
-      <% unless current_account.nil? %>
-        <%= link_to 'Log out', destroy_account_session_path %>
-        <%= link_to 'Shortcut.io', bookmarklet %>
-      <% end %>
-    </header>
 
     <div id="toolbar">
       <ul>

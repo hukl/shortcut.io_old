@@ -362,3 +362,9 @@ div#tools {
   width: 800px;
   text-align: left;
 }
+
+/* notifications */
+
+div#notifications {
+  display: none;
+}
