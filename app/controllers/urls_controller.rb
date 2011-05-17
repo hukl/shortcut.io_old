@@ -93,7 +93,7 @@ class UrlsController < ApplicationController
     page        = params[:page] || 0
     account_id  = current_account.id
 
-    s = Slingshot.search 'urls' do
+    s = Tire.search 'urls' do
       query do
         string search_term
       end

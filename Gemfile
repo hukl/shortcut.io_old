@@ -12,7 +12,7 @@ gem 'resque'
 gem 'uuid'
 gem 'will_paginate', '3.0.pre2'
 gem 'jammit'
-gem 'slingshot-rb'
+gem 'tire'
 
 # Bundle the extra gems:
 # gem 'bj'

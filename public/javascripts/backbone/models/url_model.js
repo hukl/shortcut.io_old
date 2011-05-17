@@ -40,18 +40,11 @@ var Results = Backbone.Collection.extend({
       url : '/urls/search?' + 'search_term=' + search_term + '&page=' + this.current_page,
       dataType: 'json',
       success : function(response) {
+        console.log(response)
         if (SearchResults.current_page == 0) {
-          SearchResults.refresh(
-            _.map(response, function(element) {
-              return element._source
-            })
-          )
+          SearchResults.refresh( response )
         } else {
-          SearchResults.add(
-            _.map(response, function(element) {
-              return element._source
-            })
-          )
+          SearchResults.add( response )
         }
 
         SearchResults.current_page++;

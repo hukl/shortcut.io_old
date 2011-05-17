@@ -52,6 +52,24 @@ class Url < ActiveRecord::Base
 
   private
 
+  def uri_components uri
+    host = URI.parse( uri ).host
+    host.split(".")
+  end
+
+  def uri_domain uri
+    host = URI.parse( uri ).host
+    host.match(/\w+\.\w+$/)[0]
+  end
+
+  def uri_search uri
+    query_params = URI.parse( uri ).query
+    if query_params
+      search_term  = query_params.split("&").select {|p| p =~ /^q=.+$/ }[0]
+      search_term.sub(/^q=/, "") unless search_term.nil?
+    end
+  end
+
   def create_image_uuid
     self.image_uuid = UUID.generate
   end
@@ -69,23 +87,24 @@ class Url < ActiveRecord::Base
       :title                => url.title,
       :description          => url.description,
       :uri                  => url.uri,
-      :uri_components       => ( URI.parse(url.uri).host.split(".") rescue [] ),
+      :uri_components       => uri_components( url.uri ),
       :tags                 => url.tag_list,
       :image_uuid           => url.image_uuid,
       :account_id           => url.account.id,
       :referrer             => url.referrer,
-      :referrer_components  => ( URI.parse(url.referrer).host.split(".") rescue [] ),
+      :referrer_domain      => uri_domain( url.referrer ),
+      :search_term          => uri_search( url.referrer ),
       :created_at           => url.created_at.utc.iso8601
     }
 
-    Slingshot.index('urls') do
+    Tire.index('urls') do
       store( options )
       refresh
     end
   end
 
   def delete_from_index
-    Slingshot::Client::RestClient.delete("http://localhost:9200/urls/document/#{self.id}")
+    Tire::Client::RestClient.delete("http://localhost:9200/urls/document/#{self.id}")
   end
 
 end
