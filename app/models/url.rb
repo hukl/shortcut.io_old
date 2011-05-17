@@ -14,34 +14,6 @@ class Url < ActiveRecord::Base
 
   ActiveRecord::Base.include_root_in_json = false
 
-  Tire.index 'urls' do
-    create :mappings => {
-      :url => {
-        :properties => {
-          :id               => { :type => 'long' },
-          :title            => { :type => 'string',   :boost => 2.0 },
-          :description      => { :type => 'string' },
-          :uri              => { :type => 'string' },
-          :image_uuid       => { :type => 'string',   :index => 'no' },
-          :tags             => { :type => 'string' },
-          :account_id       => { :type => 'long',     :index => 'not_analyzed', :store => true },
-          :uri_components   => { :type => 'string' },
-          :referrer         => { :type => 'string',   :index => 'no', :include_in_all => false },
-          :referrer_domain  => { :type => 'string' },
-          :search_term      => { :type => 'string' },
-          :created_at => { :type => 'date' }
-        }
-      }
-    }
-  end
-
-  def self.reindex
-    all.each do |url|
-      url.delete_from_index
-      url.update_index
-    end
-  end
-
   def action= name
   end
 
@@ -71,6 +43,31 @@ class Url < ActiveRecord::Base
     "http://background.shortcut.io/#{image_uuid[0..3]}/#{image_uuid[4..7]}/#{image_uuid}_#{size}.jpg"
   end
 
+  def update_index
+
+    url = self
+
+    options = {
+      :id                   => url.id,
+      :title                => url.title,
+      :description          => url.description,
+      :uri                  => url.uri,
+      :uri_components       => uri_components( url.uri ),
+      :tags                 => url.tag_list,
+      :image_uuid           => url.image_uuid,
+      :account_id           => url.account.id,
+      :referrer             => url.referrer,
+      :referrer_domain      => uri_domain( url.referrer ),
+      :search_term          => uri_search( url.referrer ),
+      :created_at           => url.created_at.utc.iso8601
+    }
+
+    Tire.index('urls') do
+      store( :url, options )
+      refresh
+    end
+  end
+
   private
 
   def uri_components uri
@@ -97,31 +94,6 @@ class Url < ActiveRecord::Base
 
   def create_thumbnail
     Resque.enqueue( Thumbnail, self.uri, self.image_uuid )
-  end
-
-  def update_index
-
-    url = self
-
-    options = {
-      :id                   => url.id,
-      :title                => url.title,
-      :description          => url.description,
-      :uri                  => url.uri,
-      :uri_components       => uri_components( url.uri ),
-      :tags                 => url.tag_list,
-      :image_uuid           => url.image_uuid,
-      :account_id           => url.account.id,
-      :referrer             => url.referrer,
-      :referrer_domain      => uri_domain( url.referrer ),
-      :search_term          => uri_search( url.referrer ),
-      :created_at           => url.created_at.utc.iso8601
-    }
-
-    Tire.index('urls') do
-      store( :url, options )
-      refresh
-    end
   end
 
   def delete_from_index

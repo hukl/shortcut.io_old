@@ -25,5 +25,31 @@ namespace :search do
     end
   end
 
+  task :reindex => :environment do
+    Tire.index 'urls' do
+      delete
+      create :mappings => {
+        :url => {
+          :properties => {
+            :id               => { :type => 'long' },
+            :title            => { :type => 'string',   :boost => 2.0 },
+            :description      => { :type => 'string' },
+            :uri              => { :type => 'string' },
+            :image_uuid       => { :type => 'string',   :index => 'no' },
+            :tags             => { :type => 'string' },
+            :account_id       => { :type => 'long',     :index => 'not_analyzed', :store => true },
+            :uri_components   => { :type => 'string' },
+            :referrer         => { :type => 'string',   :index => 'no', :include_in_all => false },
+            :referrer_domain  => { :type => 'string' },
+            :search_term      => { :type => 'string' },
+            :created_at => { :type => 'date' }
+          }
+        }
+      }
+    end
+
+    Url.all.each(&:update_index)
+  end
+
 
 end
