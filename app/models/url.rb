@@ -14,6 +14,27 @@ class Url < ActiveRecord::Base
 
   ActiveRecord::Base.include_root_in_json = false
 
+  Tire.index 'urls' do
+    create :mappings => {
+      :url => {
+        :properties => {
+          :id               => { :type => 'long' },
+          :title            => { :type => 'string',   :boost => 2.0 },
+          :description      => { :type => 'string' },
+          :uri              => { :type => 'string' },
+          :image_uuid       => { :type => 'string',   :index => 'no' },
+          :tags             => { :type => 'string' },
+          :account_id       => { :type => 'long',     :index => 'not_analyzed', :store => true },
+          :uri_components   => { :type => 'string' },
+          :referrer         => { :type => 'string',   :index => 'no', :include_in_all => false },
+          :referrer_domain  => { :type => 'string' },
+          :search_term      => { :type => 'string' },
+          :created_at => { :type => 'date' }
+        }
+      }
+    }
+  end
+
   def self.reindex
     all.each do |url|
       url.delete_from_index
@@ -59,7 +80,7 @@ class Url < ActiveRecord::Base
 
   def uri_domain uri
     host = URI.parse( uri ).host
-    host.match(/\w+\.\w+$/)[0]
+    host.match(/\w+\.\w+$/)[0] if host
   end
 
   def uri_search uri
@@ -98,7 +119,7 @@ class Url < ActiveRecord::Base
     }
 
     Tire.index('urls') do
-      store( options )
+      store( :url, options )
       refresh
     end
   end
