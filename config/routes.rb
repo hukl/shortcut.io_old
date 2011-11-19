@@ -18,7 +18,7 @@ Frontend::Application.routes.draw do
     end
   end
 
-  root :to => "tools#index"
+  root :to => "urls#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
