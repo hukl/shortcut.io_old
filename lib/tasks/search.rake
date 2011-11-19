@@ -5,7 +5,7 @@ namespace :search do
   desc "import all bookmarks in es"
   task :import => :environment do
 
-    Slingshot.index 'urls' do
+    Tire.index 'urls' do
       delete
       create
 
