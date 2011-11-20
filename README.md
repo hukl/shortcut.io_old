@@ -5,13 +5,13 @@ Shortcut.io is an open source software to build a bookmarking service.
 ## Background
 
 Early 2011 I have started to build my own bookmarking service as I was unsatisfied
-with the existings ones. While it is trivial to store bookmarks with any service
+with the existing ones. While it is trivial to store bookmarks with any service
 it was much harder to ever find a certain bookmark again once you have 1000+ of
 them. Shortcut.io has the goal to make finding bookmarks as easy as storing them.
 Then, when I got done about 60-70% of the initial public release I started working
 for a new company and had not enough time to continue working on it. Now, many
 months later I have realized that I will not finish it any time soon and that
-there are already enough comercial bookmarking services. Therefor it would be
+there are already enough commercial bookmarking services. Therefor it would be
 a complete waste of time if I would let this project die without any benefit for
 anybody. This is why I have decided to open source it.
 
@@ -39,7 +39,7 @@ to run.
 
 * Discover / browse bookmarks from friends
 * Smart folders based on search terms / tags
-* Ad-hoc collections for web research ( say you're looking for a new gadget or appartment and save all related bookmarks in a special collection)
+* Ad-hoc collections for web research ( say you're looking for a new gadget or apartment and save all related bookmarks in a special collection)
 * Public bookmarks
 * Improved Elasticsearch indeces
 * Browse by tags
@@ -49,6 +49,7 @@ to run.
 * Replace wkhtmltoimage with phantom.js as they have fixed all issues I filed in the meantime
 * Tests frontend / backend
 * Chrome / Safari / FF Extensions
+* Serve thumbnails via https
 …
 
 ## Dependencies
@@ -57,6 +58,17 @@ to run.
 * SQLite / MySQL / Postgres
 * Redis
 * wkhtmltoimage
+
+## About the service running on http://shortcut.io/
+
+The bookmarks are backupped every hour and synced to an offsite
+location to make sure nobody including myself loses any of them.
+
+It currently runs on two machines, one running rails, elasticsearch, redis and
+resue and the other one processes the thumbnails and serves them.
+
+The service is available through ssl. The thumbnails however are served via http
+because I didn't want to spend more money on certificates at that point.
 
 ## License
 
