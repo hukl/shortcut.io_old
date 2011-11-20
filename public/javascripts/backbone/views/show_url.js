@@ -24,7 +24,7 @@ var ShowUrlView = Backbone.View.extend({
     $(this.el).css({
       position  : "fixed",
       top       : "200px",
-      left      : parseInt(document.width/2)-400
+      left      : parseInt($(window).width()/2)-400
     })
 
     $(this.el).show();
