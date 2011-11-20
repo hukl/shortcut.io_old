@@ -59,6 +59,14 @@ to run.
 * Redis
 * wkhtmltoimage
 
+## Icons
+The icons I used are from this icon set: http://gentleface.com/free_icon_set.html
+
+I bought the library but they are also available for free under the
+Creative Commons Attribution-NonCommercial license.
+
+If you want to use them for a commercial project you have to buy a license!
+
 ## About the service running on http://shortcut.io/
 
 The bookmarks are backupped every hour and synced to an offsite
