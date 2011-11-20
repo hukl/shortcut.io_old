@@ -35,6 +35,10 @@ to run.
 
 ![Shortcut.io Screenshot](http://smyck.org/shortcutio.jpg)
 
+## Usage
+
+Basically you go to https://shortcut.io and sign up. Then you either import bookmarks or use the bookmarklet in the main menu to add new bookmarks.
+
 ## Unfinished Features / Ideas
 
 * Discover / browse bookmarks from friends
@@ -50,6 +54,7 @@ to run.
 * Tests frontend / backend
 * Chrome / Safari / FF Extensions
 * Serve thumbnails via https
+* Edit account details
 …
 
 ## Dependencies
