@@ -39,6 +39,8 @@ to run.
 
 Basically you go to https://shortcut.io and sign up. Then you either import bookmarks or use the bookmarklet in the main menu to add new bookmarks.
 
+On the bottom of the dashboard there is a "MORE" link. If you have more urls that fit on the dashboard you can get the next batch by clicking on this link.
+
 ## Unfinished Features / Ideas
 
 * Discover / browse bookmarks from friends
@@ -55,6 +57,7 @@ Basically you go to https://shortcut.io and sign up. Then you either import book
 * Chrome / Safari / FF Extensions
 * Serve thumbnails via https
 * Edit account details
+* Dynamic spacing / number of thumbnails on dashboard based on windows size
 …
 
 ## Dependencies
