@@ -65,7 +65,12 @@ On the bottom of the dashboard there is a "MORE" link. If you have more urls tha
 * Ruby / Rails
 * SQLite / MySQL / Postgres
 * Redis
+* Elasticsearch
 * wkhtmltoimage
+
+## Installation
+
+Instructions on how to set everything up will come really soon.
 
 ## Icons
 The icons I used are from this icon set: http://gentleface.com/free_icon_set.html
