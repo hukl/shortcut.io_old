@@ -71,7 +71,7 @@ On the bottom of the dashboard there is a "MORE" link. If you have more urls tha
 ## Implementation
 
 Most of the frontend stuff is implemented with backbone.js while the rails app is just the backend handling accounts and the persistence of the bookmarks.
-Therefor the the rails app is quite simple and should be easy to extend.
+Therefor the rails app is quite simple and should be easy to extend.
 
 ## Installation
 
