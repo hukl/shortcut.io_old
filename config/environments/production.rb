@@ -47,15 +47,15 @@ Frontend::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.default_url_options = { :protocol => 'https', :host => 'beta5.shortcut.io' }
+  config.action_mailer.default_url_options = { :protocol => 'https', :host => 'shortcut.io' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address              => "post.medienhaus.udk-berlin.de",
+    :address              => "your.smtp.server.com",
     :port                 => 25,
-    :domain               => 'jib-berlin.de',
-    :user_name            => 'post@jib-berlin.de',
-    :password             => 'post',
+    :domain               => 'bar.com',
+    :user_name            => 'foo@bar.com',
+    :password             => 'foo',
     :authentication       => 'plain',
     :enable_starttls_auto => true
   }

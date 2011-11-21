@@ -27,11 +27,11 @@ Frontend::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address              => "post.medienhaus.udk-berlin.de",
+    :address              => "your.smtp.server.com",
     :port                 => 25,
-    :domain               => 'jib-berlin.de',
-    :user_name            => 'post@jib-berlin.de',
-    :password             => 'post',
+    :domain               => 'bar.com',
+    :user_name            => 'foo@bar.com',
+    :password             => 'foo',
     :authentication       => 'plain',
     :enable_starttls_auto => true
   }
