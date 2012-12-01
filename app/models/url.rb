@@ -93,7 +93,7 @@ class Url < ActiveRecord::Base
   end
 
   def create_thumbnail
-    Resque.enqueue( Thumbnail, self.uri, self.image_uuid )
+    ThumbnailClient.reqeust( self.uri, self.image_uuid )
   end
 
   def delete_from_index
