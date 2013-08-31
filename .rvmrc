@@ -1,1 +1,2 @@
-rvm use 1.9.2@shortcut_frontend
+rvm use 1.9.3@shortcut_frontend --create
+

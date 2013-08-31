@@ -47,25 +47,32 @@ class Url < ActiveRecord::Base
 
     url = self
 
-    options = {
-      :id                   => url.id,
-      :title                => url.title,
-      :description          => url.description,
-      :uri                  => url.uri,
-      :uri_components       => uri_components( url.uri ),
-      :tags                 => url.tag_list,
-      :image_uuid           => url.image_uuid,
-      :account_id           => url.account.id,
-      :referrer             => url.referrer,
-      :referrer_domain      => uri_domain( url.referrer ),
-      :search_term          => uri_search( url.referrer ),
-      :created_at           => url.created_at.utc.iso8601
-    }
+    begin
 
-    Tire.index('urls') do
-      store( :url, options )
-      refresh
+      options = {
+        :id                   => url.id,
+        :title                => url.title,
+        :description          => url.description,
+        :uri                  => url.uri,
+        :uri_components       => uri_components( url.uri ),
+        :tags                 => url.tag_list,
+        :image_uuid           => url.image_uuid,
+        :account_id           => url.account.id,
+        :referrer             => url.referrer,
+        :referrer_domain      => uri_domain( url.referrer ),
+        :search_term          => uri_search( url.referrer ),
+        :created_at           => url.created_at.utc.iso8601
+      }
+
+      Tire.index('urls') do
+        store( options )
+        refresh
+      end
+
+    rescue
+      logger.warn "Could not index: #{self.inspect}"
     end
+
   end
 
   private
@@ -76,15 +83,19 @@ class Url < ActiveRecord::Base
   end
 
   def uri_domain uri
-    host = URI.parse( uri ).host
-    host.match(/\w+\.\w+$/)[0] if host
+    if uri
+      host = URI.parse( uri ).host
+      host.match(/\w+\.\w+$/)[0] if host
+    end
   end
 
   def uri_search uri
-    query_params = URI.parse( uri ).query
-    if query_params
-      search_term  = query_params.split("&").select {|p| p =~ /^q=.+$/ }[0]
-      search_term.sub(/^q=/, "") unless search_term.nil?
+    if uri
+      query_params = URI.parse( uri ).query
+      if query_params
+        search_term  = query_params.split("&").select {|p| p =~ /^q=.+$/ }[0]
+        search_term.sub(/^q=/, "") unless search_term.nil?
+      end
     end
   end
 
@@ -93,7 +104,7 @@ class Url < ActiveRecord::Base
   end
 
   def create_thumbnail
-    ThumbnailClient.reqeust( self.uri, self.image_uuid )
+    ThumbnailClient.request( self.uri, self.image_uuid )
   end
 
   def delete_from_index

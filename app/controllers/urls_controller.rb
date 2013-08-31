@@ -93,16 +93,27 @@ class UrlsController < ApplicationController
     page        = params[:page] || 0
     account_id  = current_account.id
 
-    s = Tire.search 'urls' do
-      query do
-        string search_term
+    #s = Tire.search 'urls' do
+      #query do
+        #string search_term
+      #end
+
+      #filter :term, :account_id => account_id
+
+      #size(30)
+
+      #from page.to_i * 30
+    #end
+
+
+    s = Tire.search('urls') do |search|
+      search.query do |query|
+        query.string search_term
       end
 
-      filter :term, :account_id => account_id
-
-      size(30)
-
-      from page.to_i * 30
+      search.filter :term, :account_id => account_id
+      search.size(30)
+      search.from page.to_i * 30
     end
 
     render :json => s.results
