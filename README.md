@@ -39,6 +39,8 @@ to run.
 
 Basically you go to https://shortcut.io and sign up. Then you either import bookmarks or use the bookmarklet in the main menu to add new bookmarks.
 
+After signing up just right click on the »Shortcut.io Bookmarklet« link and create a bookmark from it. Now on a web site you want to save, click that bookmark and a dialog will open.
+
 On the bottom of the dashboard there is a "MORE" link. If you have more urls that fit on the dashboard you can get the next batch by clicking on this link.
 
 ## Unfinished Features / Ideas
