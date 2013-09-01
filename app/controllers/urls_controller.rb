@@ -67,11 +67,16 @@ class UrlsController < ApplicationController
   end
 
   def update
-    tags = params.delete( :tags )
+    valid_keys   = ["uri", "title", "description", "tags"]
+    clean_params = params.select do |param|
+      valid_keys.include? param
+    end
 
-    @url.tag_list = tags
+    tags = clean_params.delete( "tags" )
 
-    if @url.update_attributes( params )
+    @url.tag_list = tags.gsub(/\s/, "").split(",")
+
+    if @url.update_attributes( clean_params )
       render :json => @url.to_hash
     else
       render :nothing => true
