@@ -49,14 +49,5 @@ Frontend::Application.configure do
 
   config.action_mailer.default_url_options = { :protocol => 'https', :host => 'shortcut.io' }
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address              => "your.smtp.server.com",
-    :port                 => 25,
-    :domain               => 'bar.com',
-    :user_name            => 'foo@bar.com',
-    :password             => 'foo',
-    :authentication       => 'plain',
-    :enable_starttls_auto => true
-  }
+  config.action_mailer.delivery_method = :sendmail
 end
