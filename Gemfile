@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
+#gem 'rails', '3.0.7'
+gem 'rails', '3.0.20'
 gem 'jquery-rails', '1.0.2'
 gem 'pg'
 gem 'acts-as-taggable-on', '2.0.6'
@@ -11,6 +12,7 @@ gem 'uuid', '2.3.1'
 gem 'will_paginate', '3.0.pre2'
 gem 'jammit', '0.6.0'
 gem 'tire'
+gem 'yajl-ruby'
 
 # Bundle the extra gems:
 # gem 'bj'
